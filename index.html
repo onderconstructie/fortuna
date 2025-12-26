@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomen Fortuna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E4BA;
+            --gold-dark: #996515;
+            --deep-blue: #1a1a2e;
+            --darker-blue: #0f0f1a;
+            --accent-red: #e63946;
+            --white: #fefefe;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--darker-blue) 0%, var(--deep-blue) 50%, #16213e 100%);
+            min-height: 100vh;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Animated background stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            animation: rotate-slow 20s linear infinite;
+        }
+
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--gold);
+            opacity: 0.7;
+            letter-spacing: 0.2em;
+            margin-top: 0.25rem;
+        }
+
+        /* Main Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 2rem;
+            flex: 1;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .card-header svg {
+            width: 24px;
+            height: 24px;
+            color: var(--gold);
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            letter-spacing: 0.1em;
+        }
+
+        /* Input Section */
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 0.875rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 0.75rem;
+            color: var(--white);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.25rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--deep-blue);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-danger {
+            background: rgba(230, 57, 70, 0.2);
+            color: var(--accent-red);
+            border: 1px solid rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-spin {
+            width: 100%;
+            padding: 1.25rem 2rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+
+        .btn-spin:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Names List */
+        .names-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .names-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .names-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .names-list::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+
+        .name-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .name-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .name-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .name-remove {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 0.25rem;
+            transition: all 0.2s ease;
+        }
+
+        .name-remove:hover {
+            color: var(--accent-red);
+            background: rgba(230, 57, 70, 0.2);
+        }
+
+        .name-remove svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .names-count {
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Wheel Section */
+        .wheel-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            aspect-ratio: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .wheel-outer {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            padding: 8px;
+            box-shadow: 
+                0 0 60px rgba(212, 175, 55, 0.3),
+                inset 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .wheel-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--deep-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.4),
+                inset 0 2px 10px rgba(255, 255, 255, 0.3);
+            z-index: 10;
+        }
+
+        .wheel-center svg {
+            width: 40px;
+            height: 40px;
+            color: var(--deep-blue);
+        }
+
+        /* Pointer */
+        .pointer {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+        }
+
+        .pointer svg {
+            width: 40px;
+            height: 50px;
+            color: var(--gold);
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Results Section */
+        .results-section .card {
+            height: fit-content;
+        }
+
+        .drawn-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .drawn-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .drawn-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--deep-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .drawn-name {
+            flex: 1;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .empty-results {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .empty-results svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 0.75rem;
+            opacity: 0.5;
+        }
+
+        /* Winner Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: linear-gradient(135deg, var(--deep-blue), var(--darker-blue));
+            border: 2px solid var(--gold);
+            border-radius: 2rem;
+            padding: 3rem;
+            text-align: center;
+            max-width: 400px;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 100px rgba(212, 175, 55, 0.3);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px 10px rgba(212, 175, 55, 0.2); }
+        }
+
+        .modal-icon svg {
+            width: 40px;
+            height: 40px;
+            color: var(--deep-blue);
+        }
+
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.2em;
+        }
+
+        .modal-name {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 2rem;
+        }
+
+        .modal .btn {
+            min-width: 150px;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Action buttons row */
+        .action-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .action-row .btn {
+            flex: 1;
+            padding: 0.625rem;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="22" stroke="url(#goldGrad)" stroke-width="2"/>
+                    <circle cx="24" cy="24" r="16" stroke="url(#goldGrad)" stroke-width="1.5"/>
+                    <path d="M24 8 L26 22 L24 24 L22 22 Z" fill="url(#goldGrad)"/>
+                    <path d="M24 40 L22 26 L24 24 L26 26 Z" fill="url(#goldGrad)"/>
+                    <path d="M8 24 L22 22 L24 24 L22 26 Z" fill="url(#goldGrad)"/>
+                    <path d="M40 24 L26 26 L24 24 L26 22 Z" fill="url(#goldGrad)"/>
+                    <defs>
+                        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#F4E4BA"/>
+                            <stop offset="50%" stop-color="#D4AF37"/>
+                            <stop offset="100%" stop-color="#996515"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Nomen Fortuna</h1>
+            </div>
+            <p class="subtitle">Het lot beslist</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel - Names Input -->
+            <section class="card">
+                <div class="card-header">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span class="card-title">Deelnemers</span>
+                </div>
+                
+                <div class="input-group">
+                    <input type="text" id="nameInput" placeholder="Voer een naam in..." autocomplete="off">
+                    <button class="btn btn-primary" id="addBtn" title="Naam toevoegen">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="names-list" id="namesList"></div>
+                
+                <p class="names-count"><span id="namesCount">0</span> deelnemers in het rad</p>
+
+                <div class="action-row">
+                    <button class="btn btn-secondary" id="resetBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                            <path d="M3 3v5h5"/>
+                        </svg>
+                        Herstel alles
+                    </button>
+                    <button class="btn btn-danger" id="clearBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        </svg>
+                        Wis alles
+                    </button>
+                </div>
+            </section>
+
+            <!-- Center - Wheel -->
+            <section class="wheel-section">
+                <div class="wheel-container">
+                    <div class="pointer">
+                        <svg viewBox="0 0 40 50" fill="currentColor">
+                            <path d="M20 50 L5 15 Q5 0 20 0 Q35 0 35 15 Z"/>
+                        </svg>
+                    </div>
+                    <div class="wheel-outer">
+                        <div class="wheel-inner">
+                            <canvas id="wheel" width="800" height="800"></canvas>
+                        </div>
+                    </div>
+                    <div class="wheel-center">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-spin" id="spinBtn" disabled>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                        <polyline points="21 3 21 9 15 9"/>
+                    </svg>
+                    Draai het rad!
+                </button>
+            </section>
+
+            <!-- Right Panel - Results -->
+            <section class="results-section">
+                <div class="card">
+                    <div class="card-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                        </svg>
+                        <span class="card-title">Getrokken</span>
+                    </div>
+                    
+                    <div class="drawn-list" id="drawnList">
+                        <div class="empty-results">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                            <p>Nog niemand getrokken</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Winner Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <div class="modal-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+            </div>
+            <p class="modal-title">Het lot heeft gekozen</p>
+            <p class="modal-name" id="winnerName">-</p>
+            <button class="btn btn-primary" id="closeModal">Doorgaan</button>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let names = [];
+        let drawnNames = [];
+        let originalNames = [];
+        let isSpinning = false;
+        let currentRotation = 0;
+
+        // Color palette - elegant and distinct
+        const colors = [
+            '#E63946', '#F4A261', '#2A9D8F', '#264653', '#E9C46A',
+            '#9B5DE5', '#00BBF9', '#00F5D4', '#FEE440', '#F15BB5',
+            '#7209B7', '#3A0CA3', '#4361EE', '#4CC9F0', '#80ED99',
+            '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+            '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9'
+        ];
+
+        // Elements
+        const canvas = document.getElementById('wheel');
+        const ctx = canvas.getContext('2d');
+        const nameInput = document.getElementById('nameInput');
+        const addBtn = document.getElementById('addBtn');
+        const spinBtn = document.getElementById('spinBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const namesList = document.getElementById('namesList');
+        const drawnList = document.getElementById('drawnList');
+        const namesCount = document.getElementById('namesCount');
+        const modal = document.getElementById('modal');
+        const winnerName = document.getElementById('winnerName');
+        const closeModal = document.getElementById('closeModal');
+
+        // Initialize stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Draw wheel
+        function drawWheel() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = canvas.width / 2 - 10;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (names.length === 0) {
+                // Empty state
+                ctx.fillStyle = '#1a1a2e';
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                ctx.fillStyle = 'rgba(212, 175, 55, 0.3)';
+                ctx.font = '24px Quicksand';
+                ctx.textAlign = 'center';
+                ctx.fillText('Voeg namen toe', centerX, centerY - 10);
+                ctx.fillText('om te beginnen', centerX, centerY + 20);
+                return;
+            }
+
+            const sliceAngle = (2 * Math.PI) / names.length;
+
+            names.forEach((name, i) => {
+                const startAngle = i * sliceAngle;
+                const endAngle = startAngle + sliceAngle;
+
+                // Draw slice
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.fill();
+
+                // Draw border
+                ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Draw text
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(startAngle + sliceAngle / 2);
+                ctx.textAlign = 'right';
+                ctx.fillStyle = '#fff';
+                ctx.font = `bold ${Math.min(24, 400 / names.length)}px Quicksand`;
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                ctx.shadowBlur = 4;
+                
+                // Truncate long names
+                let displayName = name;
+                if (displayName.length > 12) {
+                    displayName = displayName.substring(0, 11) + '…';
+                }
+                ctx.fillText(displayName, radius - 20, 6);
+                ctx.restore();
+            });
+        }
+
+        // Update names list
+        function updateNamesList() {
+            if (names.length === 0) {
+                namesList.innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        <p>Nog geen deelnemers</p>
+                    </div>
+                `;
+            } else {
+                namesList.innerHTML = names.map((name, i) => `
+                    <div class="name-item">
+                        <span class="name-color" style="background: ${colors[i % colors.length]}"></span>
+                        <span class="name-text">${name}</span>
+                        <button class="name-remove" onclick="removeName(${i})" title="Verwijderen">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 6L6 18M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                `).join('');
+            }
+            namesCount.textContent = names.length;
+            spinBtn.disabled = names.length < 2;
+        }
+
+        // Update drawn list
+        function updateDrawnList() {
+            if (drawnNames.length === 0) {
+                drawnList.innerHTML = `
+                    <div class="empty-results">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <p>Nog niemand getrokken</p>
+                    </div>
+                `;
+            } else {
+                drawnList.innerHTML = drawnNames.map((name, i) => `
+                    <div class="drawn-item">
+                        <span class="drawn-number">${i + 1}</span>
+                        <span class="drawn-name">${name}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Add name
+        function addName() {
+            const name = nameInput.value.trim();
+            if (name && !names.includes(name)) {
+                names.push(name);
+                if (!originalNames.includes(name)) {
+                    originalNames.push(name);
+                }
+                nameInput.value = '';
+                updateNamesList();
+                drawWheel();
+            }
+            nameInput.focus();
+        }
+
+        // Remove name
+        function removeName(index) {
+            names.splice(index, 1);
+            updateNamesList();
+            drawWheel();
+        }
+
+        // Spin wheel
+        function spin() {
+            if (isSpinning || names.length < 2) return;
+            
+            isSpinning = true;
+            spinBtn.disabled = true;
+
+            // Calculate random winner
+            const winnerIndex = Math.floor(Math.random() * names.length);
+            const sliceAngle = 360 / names.length;
+            
+            // Calculate rotation to land on winner
+            // The pointer is at the top (270 degrees or -90 degrees from 0)
+            // We need to rotate so the winner slice is at the top
+            const targetAngle = 270 - (winnerIndex * sliceAngle) - (sliceAngle / 2);
+            const spins = 5 + Math.random() * 3; // 5-8 full rotations
+            const totalRotation = spins * 360 + targetAngle - (currentRotation % 360);
+
+            currentRotation += totalRotation;
+
+            canvas.style.transform = `rotate(${currentRotation}deg)`;
+
+            // Show winner after animation
+            setTimeout(() => {
+                const winner = names[winnerIndex];
+                winnerName.textContent = winner;
+                modal.classList.add('active');
+                createConfetti();
+
+                // Remove winner from pool
+                drawnNames.push(winner);
+                names.splice(winnerIndex, 1);
+                updateNamesList();
+                updateDrawnList();
+                drawWheel();
+
+                isSpinning = false;
+                spinBtn.disabled = names.length < 2;
+            }, 4100);
+        }
+
+        // Reset all (bring back drawn names)
+        function resetAll() {
+            names = [...originalNames];
+            drawnNames = [];
+            currentRotation = 0;
+            canvas.style.transform = 'rotate(0deg)';
+            updateNamesList();
+            updateDrawnList();
+            drawWheel();
+        }
+
+        // Clear all
+        function clearAll() {
+            names = [];
+            drawnNames = [];
+            originalNames = [];
+            currentRotation = 0;
+            canvas.style.transform = 'rotate(0deg)';
+            updateNamesList();
+            updateDrawnList();
+            drawWheel();
+        }
+
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['#D4AF37', '#F4E4BA', '#E63946', '#2A9D8F', '#9B5DE5', '#00BBF9'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.cssText = `
+                    left: ${Math.random() * 100}vw;
+                    top: -20px;
+                    width: ${Math.random() * 10 + 5}px;
+                    height: ${Math.random() * 10 + 5}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                    animation: fall ${Math.random() * 2 + 2}s linear forwards;
+                `;
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 4000);
+            }
+
+            // Add confetti animation
+            if (!document.getElementById('confetti-style')) {
+                const style = document.createElement('style');
+                style.id = 'confetti-style';
+                style.textContent = `
+                    @keyframes fall {
+                        to {
+                            transform: translateY(100vh) rotate(720deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Event listeners
+        addBtn.addEventListener('click', addName);
+        nameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addName();
+        });
+        spinBtn.addEventListener('click', spin);
+        resetBtn.addEventListener('click', resetAll);
+        clearBtn.addEventListener('click', clearAll);
+        closeModal.addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        // Initialize
+        createStars();
+        updateNamesList();
+        updateDrawnList();
+        drawWheel();
+    </script>
+</body>
+</html>
