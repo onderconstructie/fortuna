@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomen Fortuna</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23F4E4BA'/%3E%3Cstop offset='50%25' stop-color='%23D4AF37'/%3E%3Cstop offset='100%25' stop-color='%23996515'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='24' cy='24' r='22' stroke='url(%23g)' stroke-width='2' fill='%231a1a2e'/%3E%3Ccircle cx='24' cy='24' r='16' stroke='url(%23g)' stroke-width='1.5' fill='none'/%3E%3Cpath d='M24 8 L26 22 L24 24 L22 22 Z' fill='url(%23g)'/%3E%3Cpath d='M24 40 L22 26 L24 24 L26 26 Z' fill='url(%23g)'/%3E%3Cpath d='M8 24 L22 22 L24 24 L22 26 Z' fill='url(%23g)'/%3E%3Cpath d='M40 24 L26 26 L24 24 L26 22 Z' fill='url(%23g)'/%3E%3C/svg%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Nomen Fortuna – Onder Constructie</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23f8fafc' stroke='%23e2e8f0' stroke-width='1.5'/%3E%3Cline x1='10' y1='14' x2='16' y2='20' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='16' y1='20' x2='14' y2='28' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='16' y1='20' x2='24' y2='16' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='24' y1='16' x2='30' y2='12' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='24' y1='16' x2='28' y2='22' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='28' y1='22' x2='26' y2='29' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='16' y1='20' x2='20' y2='26' stroke='%23e2e8f0' stroke-width='1'/%3E%3Cline x1='20' y1='26' x2='26' y2='29' stroke='%23e2e8f0' stroke-width='1'/%3E%3Ccircle cx='10' cy='14' r='2' fill='%23cbd5e1'/%3E%3Ccircle cx='30' cy='12' r='2' fill='%23cbd5e1'/%3E%3Ccircle cx='14' cy='28' r='2' fill='%23cbd5e1'/%3E%3Ccircle cx='26' cy='29' r='2' fill='%23cbd5e1'/%3E%3Ccircle cx='16' cy='20' r='2.5' fill='%2310b981'/%3E%3Ccircle cx='24' cy='16' r='2.5' fill='%2310b981'/%3E%3Ccircle cx='28' cy='22' r='2' fill='%2310b981'/%3E%3Ccircle cx='20' cy='26' r='2' fill='%2310b981'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #D4AF37;
-            --gold-light: #F4E4BA;
-            --gold-dark: #996515;
-            --deep-blue: #1a1a2e;
-            --darker-blue: #0f0f1a;
-            --accent-red: #e63946;
-            --white: #fefefe;
-            --glass: rgba(255, 255, 255, 0.05);
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-500: #64748b;
+            --slate-400: #94a3b8;
+            --slate-300: #cbd5e1;
+            --slate-200: #e2e8f0;
+            --slate-100: #f1f5f9;
+            --slate-50: #f8fafc;
+            --wit: #ffffff;
+            --accent: #10b981;
+            --accent-light: #d1fae5;
+            --danger: #ef4444;
         }
 
         * {
@@ -25,172 +31,133 @@
         }
 
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, var(--darker-blue) 0%, var(--deep-blue) 50%, #16213e 100%);
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: var(--slate-50);
+            color: var(--slate-700);
+            line-height: 1.6;
             min-height: 100vh;
-            color: var(--white);
-            overflow-x: hidden;
-        }
-
-        /* Animated background stars */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--gold-light);
-            border-radius: 50%;
-            animation: twinkle 3s infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.5); }
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Header */
-        header {
+        .header {
+            padding: 3rem 2rem 4rem;
             text-align: center;
-            margin-bottom: 2rem;
+            background: var(--wit);
+            border-bottom: 1px solid var(--slate-200);
+            position: relative;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--slate-400);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo svg {
+            width: 80px;
+            height: 80px;
+        }
+
+        .site-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            letter-spacing: -0.03em;
             margin-bottom: 0.5rem;
         }
 
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            animation: rotate-slow 20s linear infinite;
+        .site-subtitle {
+            font-size: 1.125rem;
+            color: var(--slate-500);
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        @keyframes rotate-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        /* Main */
+        .main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
         }
 
-        h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            color: var(--gold);
-            opacity: 0.7;
-            letter-spacing: 0.2em;
-            margin-top: 0.25rem;
-        }
-
-        /* Main Layout */
-        .main-content {
+        .main-grid {
             display: grid;
-            grid-template-columns: 1fr 1.5fr 1fr;
+            grid-template-columns: 280px 1fr 240px;
             gap: 2rem;
-            flex: 1;
             align-items: start;
         }
 
-        @media (max-width: 1024px) {
-            .main-content {
+        @media (max-width: 900px) {
+            .main-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
         }
 
         /* Cards */
         .card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 1.5rem;
+            background: var(--wit);
+            border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.25rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .card-header svg {
-            width: 24px;
-            height: 24px;
-            color: var(--gold);
+            border: 1.5px solid var(--slate-200);
         }
 
         .card-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
+            font-size: 0.6875rem;
             font-weight: 600;
-            color: var(--gold-light);
+            text-transform: uppercase;
             letter-spacing: 0.1em;
+            color: var(--slate-400);
+            margin-bottom: 1rem;
         }
 
-        /* Input Section */
+        /* Input */
         .input-group {
             display: flex;
             gap: 0.5rem;
             margin-bottom: 1rem;
         }
 
-        input[type="text"] {
+        .input-field {
             flex: 1;
-            padding: 0.875rem 1rem;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 0.75rem;
-            color: var(--white);
-            font-family: 'Quicksand', sans-serif;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            padding: 0.75rem 1rem;
+            font-size: 0.9375rem;
+            font-family: inherit;
+            border: 1.5px solid var(--slate-200);
+            border-radius: 8px;
+            background: var(--wit);
+            color: var(--slate-800);
+            transition: border-color 0.2s;
         }
 
-        input[type="text"]:focus {
+        .input-field:focus {
             outline: none;
-            border-color: var(--gold);
-            background: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            border-color: var(--accent);
         }
 
-        input[type="text"]::placeholder {
-            color: rgba(255, 255, 255, 0.4);
+        .input-field::placeholder {
+            color: var(--slate-400);
         }
 
         /* Buttons */
@@ -199,149 +166,147 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 0.875rem 1.25rem;
+            padding: 0.75rem 1rem;
             border: none;
-            border-radius: 0.75rem;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
 
         .btn svg {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--deep-blue);
+            background: var(--accent);
+            color: var(--wit);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(212, 175, 55, 0.4);
-        }
-
-        .btn-danger {
-            background: rgba(230, 57, 70, 0.2);
-            color: var(--accent-red);
-            border: 1px solid rgba(230, 57, 70, 0.3);
-        }
-
-        .btn-danger:hover {
-            background: rgba(230, 57, 70, 0.3);
-        }
-
-        .btn-spin {
-            width: 100%;
-            padding: 1.25rem 2rem;
-            font-size: 1.1rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-top: 1rem;
-        }
-
-        .btn-spin:disabled {
+        .btn-primary:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
-        /* Names List */
+        .btn-secondary {
+            background: var(--slate-100);
+            color: var(--slate-600);
+            border: 1px solid var(--slate-200);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--slate-300);
+            color: var(--slate-700);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        .btn-icon {
+            padding: 0.75rem;
+        }
+
+        /* Names list */
         .names-list {
-            max-height: 300px;
+            max-height: 280px;
             overflow-y: auto;
             margin-bottom: 1rem;
         }
 
         .names-list::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
 
         .names-list::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 3px;
+            background: var(--slate-100);
+            border-radius: 2px;
         }
 
         .names-list::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 3px;
+            background: var(--slate-300);
+            border-radius: 2px;
         }
 
         .name-item {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 0.5rem;
+            padding: 0.625rem 0.75rem;
+            background: var(--slate-50);
+            border-radius: 6px;
             margin-bottom: 0.5rem;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .name-color {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             flex-shrink: 0;
         }
 
         .name-text {
             flex: 1;
+            font-size: 0.875rem;
             font-weight: 500;
+            color: var(--slate-700);
         }
 
         .name-remove {
             background: none;
             border: none;
-            color: rgba(255, 255, 255, 0.4);
+            color: var(--slate-400);
             cursor: pointer;
             padding: 0.25rem;
-            border-radius: 0.25rem;
-            transition: all 0.2s ease;
+            border-radius: 4px;
+            transition: all 0.2s;
         }
 
         .name-remove:hover {
-            color: var(--accent-red);
-            background: rgba(230, 57, 70, 0.2);
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
         }
 
         .name-remove svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
         }
 
         .names-count {
             text-align: center;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8125rem;
+            color: var(--slate-400);
+            margin-bottom: 1rem;
         }
 
-        /* Wheel Section */
+        .action-row {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-row .btn {
+            flex: 1;
+            font-size: 0.75rem;
+            padding: 0.625rem 0.5rem;
+        }
+
+        /* Wheel */
         .wheel-section {
             display: flex;
             flex-direction: column;
@@ -351,7 +316,7 @@
         .wheel-container {
             position: relative;
             width: 100%;
-            max-width: 420px;
+            max-width: 380px;
             aspect-ratio: 1;
             margin-bottom: 1.5rem;
         }
@@ -360,18 +325,16 @@
             position: absolute;
             inset: 0;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            padding: 8px;
-            box-shadow: 
-                0 0 60px rgba(212, 175, 55, 0.3),
-                inset 0 0 30px rgba(0, 0, 0, 0.3);
+            background: var(--slate-200);
+            padding: 6px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .wheel-inner {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: var(--deep-blue);
+            background: var(--wit);
             position: relative;
             overflow: hidden;
         }
@@ -388,138 +351,116 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            width: 60px;
+            height: 60px;
+            background: var(--wit);
+            border: 3px solid var(--slate-200);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 
-                0 4px 20px rgba(0, 0, 0, 0.4),
-                inset 0 2px 10px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
 
         .wheel-center svg {
-            width: 40px;
-            height: 40px;
-            color: var(--deep-blue);
+            width: 24px;
+            height: 24px;
+            color: var(--accent);
         }
 
-        /* Pointer */
         .pointer {
             position: absolute;
-            top: -10px;
+            top: -8px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 20;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
         }
 
         .pointer svg {
-            width: 40px;
-            height: 50px;
-            color: var(--gold);
+            width: 32px;
+            height: 40px;
+            color: var(--accent);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
-        /* Empty State */
+        .btn-spin {
+            width: 100%;
+            max-width: 380px;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+
+        /* Empty state */
         .empty-state {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
-            color: rgba(255, 255, 255, 0.4);
-            text-align: center;
             padding: 2rem;
+            color: var(--slate-400);
+            text-align: center;
         }
 
         .empty-state svg {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        /* Results Section */
-        .results-section .card {
-            height: fit-content;
-        }
-
-        .drawn-list {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .drawn-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        @keyframes popIn {
-            from {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .drawn-number {
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--deep-blue);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.85rem;
-        }
-
-        .drawn-name {
-            flex: 1;
-            font-weight: 600;
-            color: var(--gold-light);
-        }
-
-        .empty-results {
-            text-align: center;
-            padding: 2rem;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .empty-results svg {
             width: 48px;
             height: 48px;
             margin-bottom: 0.75rem;
             opacity: 0.5;
         }
 
-        /* Winner Modal */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+        .empty-state p {
+            font-size: 0.875rem;
+        }
+
+        /* Drawn list */
+        .drawn-list {
+            min-height: 200px;
+        }
+
+        .drawn-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 0.75rem;
+            background: var(--accent-light);
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+
+        .drawn-number {
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            color: var(--wit);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .drawn-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--slate-700);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
+            z-index: 100;
         }
 
         .modal-overlay.active {
@@ -528,130 +469,148 @@
         }
 
         .modal {
-            background: linear-gradient(135deg, var(--deep-blue), var(--darker-blue));
-            border: 2px solid var(--gold);
-            border-radius: 2rem;
-            padding: 3rem;
+            background: var(--wit);
+            border-radius: 16px;
+            padding: 2.5rem;
             text-align: center;
-            max-width: 400px;
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
-            box-shadow: 0 0 100px rgba(212, 175, 55, 0.3);
+            max-width: 360px;
+            width: 100%;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s;
         }
 
         .modal-overlay.active .modal {
-            transform: scale(1);
+            transform: translateY(0) scale(1);
         }
 
         .modal-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            width: 64px;
+            height: 64px;
+            background: var(--accent-light);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-            50% { transform: scale(1.05); box-shadow: 0 0 30px 10px rgba(212, 175, 55, 0.2); }
         }
 
         .modal-icon svg {
-            width: 40px;
-            height: 40px;
-            color: var(--deep-blue);
+            width: 32px;
+            height: 32px;
+            color: var(--accent);
         }
 
         .modal-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            color: var(--gold);
+            font-size: 0.875rem;
+            color: var(--slate-500);
             margin-bottom: 0.5rem;
-            letter-spacing: 0.2em;
         }
 
         .modal-name {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--gold-light);
-            margin-bottom: 2rem;
+            color: var(--slate-800);
+            margin-bottom: 1.5rem;
         }
 
         .modal .btn {
-            min-width: 150px;
+            width: 100%;
         }
 
-        /* Confetti */
-        .confetti {
-            position: fixed;
-            pointer-events: none;
-            z-index: 999;
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--slate-200);
+            background: var(--wit);
         }
 
-        /* Action buttons row */
-        .action-row {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
+        .quote {
+            font-size: 0.8125rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
         }
 
-        .action-row .btn {
-            flex: 1;
-            padding: 0.625rem;
-            font-size: 0.8rem;
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6875rem;
+            color: var(--slate-400);
+            background: var(--slate-100);
+            padding: 0.375rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        .footer-badge a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .footer-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: #f97316;
+            border-radius: 50%;
+        }
+
+        .footer-badge:hover .dot {
+            background: var(--accent);
+        }
+
+        @media (max-width: 640px) {
+            .header {
+                padding: 2rem 1.5rem 3rem;
+            }
+
+            .site-title {
+                font-size: 1.625rem;
+            }
+
+            .main {
+                padding: 2rem 1.25rem 3rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Stars Background -->
-    <div class="stars" id="stars"></div>
+    <header class="header">
+        <a href="https://onderconstructie.github.io/projectmanagement/" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Projectmanagement
+        </a>
+        <div class="logo">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="36" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+                <!-- Rad -->
+                <circle cx="40" cy="40" r="24" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+                <!-- Segmenten -->
+                <line x1="40" y1="16" x2="40" y2="64" stroke="#cbd5e1" stroke-width="1.5"/>
+                <line x1="16" y1="40" x2="64" y2="40" stroke="#cbd5e1" stroke-width="1.5"/>
+                <line x1="23" y1="23" x2="57" y2="57" stroke="#cbd5e1" stroke-width="1.5"/>
+                <line x1="57" y1="23" x2="23" y2="57" stroke="#cbd5e1" stroke-width="1.5"/>
+                <!-- Center -->
+                <circle cx="40" cy="40" r="6" fill="#cbd5e1"/>
+                <!-- Pointer -->
+                <path d="M36 12 L40 18 L44 12 Z" fill="#10b981"/>
+            </svg>
+        </div>
+        <h1 class="site-title">Nomen Fortuna</h1>
+        <p class="site-subtitle">Trek willekeurig namen uit een groep.</p>
+    </header>
 
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="logo">
-                <svg class="logo-icon" viewBox="0 0 48 48" fill="none">
-                    <circle cx="24" cy="24" r="22" stroke="url(#goldGrad)" stroke-width="2"/>
-                    <circle cx="24" cy="24" r="16" stroke="url(#goldGrad)" stroke-width="1.5"/>
-                    <path d="M24 8 L26 22 L24 24 L22 22 Z" fill="url(#goldGrad)"/>
-                    <path d="M24 40 L22 26 L24 24 L26 26 Z" fill="url(#goldGrad)"/>
-                    <path d="M8 24 L22 22 L24 24 L22 26 Z" fill="url(#goldGrad)"/>
-                    <path d="M40 24 L26 26 L24 24 L26 22 Z" fill="url(#goldGrad)"/>
-                    <defs>
-                        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#F4E4BA"/>
-                            <stop offset="50%" stop-color="#D4AF37"/>
-                            <stop offset="100%" stop-color="#996515"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <h1>Nomen Fortuna</h1>
-            </div>
-            <p class="subtitle">Het lot beslist</p>
-        </header>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Left Panel - Names Input -->
-            <section class="card">
-                <div class="card-header">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                    <span class="card-title">Deelnemers</span>
-                </div>
+    <main class="main">
+        <div class="main-grid">
+            <!-- Names Input -->
+            <div class="card">
+                <p class="card-title">Deelnemers</p>
                 
                 <div class="input-group">
-                    <input type="text" id="nameInput" placeholder="Namen (gescheiden door , of ;)" autocomplete="off">
-                    <button class="btn btn-primary" id="addBtn" title="Naam toevoegen">
+                    <input type="text" class="input-field" id="nameInput" placeholder="Namen (gescheiden door komma)" autocomplete="off">
+                    <button class="btn btn-primary btn-icon" id="addBtn" title="Toevoegen">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M12 5v14M5 12h14"/>
                         </svg>
@@ -660,7 +619,7 @@
 
                 <div class="names-list" id="namesList"></div>
                 
-                <p class="names-count"><span id="namesCount">0</span> deelnemers in het rad</p>
+                <p class="names-count"><span id="namesCount">0</span> deelnemers</p>
 
                 <div class="action-row">
                     <button class="btn btn-secondary" id="resetBtn">
@@ -668,24 +627,24 @@
                             <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
                             <path d="M3 3v5h5"/>
                         </svg>
-                        Herstel alles
+                        Herstel
                     </button>
                     <button class="btn btn-danger" id="clearBtn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
                             <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                         </svg>
-                        Wis alles
+                        Wis
                     </button>
                 </div>
-            </section>
+            </div>
 
-            <!-- Center - Wheel -->
-            <section class="wheel-section">
+            <!-- Wheel -->
+            <div class="wheel-section">
                 <div class="wheel-container">
                     <div class="pointer">
-                        <svg viewBox="0 0 40 50" fill="currentColor">
-                            <path d="M20 50 L5 15 Q5 0 20 0 Q35 0 35 15 Z"/>
+                        <svg viewBox="0 0 32 40" fill="currentColor">
+                            <path d="M16 40 L4 12 Q4 0 16 0 Q28 0 28 12 Z"/>
                         </svg>
                     </div>
                     <div class="wheel-outer">
@@ -705,33 +664,33 @@
                         <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
                         <polyline points="21 3 21 9 15 9"/>
                     </svg>
-                    Draai het rad!
+                    Draai het rad
                 </button>
-            </section>
+            </div>
 
-            <!-- Right Panel - Results -->
-            <section class="results-section">
-                <div class="card">
-                    <div class="card-header">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            <!-- Results -->
+            <div class="card">
+                <p class="card-title">Getrokken</p>
+                <div class="drawn-list" id="drawnList">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
                         </svg>
-                        <span class="card-title">Getrokken</span>
-                    </div>
-                    
-                    <div class="drawn-list" id="drawnList">
-                        <div class="empty-results">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M12 6v6l4 2"/>
-                            </svg>
-                            <p>Nog niemand getrokken</p>
-                        </div>
+                        <p>Nog niemand getrokken</p>
                     </div>
                 </div>
-            </section>
-        </main>
-    </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="quote">Het lot valt hen toe die handelen.</p>
+        <div class="footer-badge">
+            <span class="dot"></span>
+            <a href="https://bit.ly/4azfO7S">contact</a>
+        </div>
+    </footer>
 
     <!-- Winner Modal -->
     <div class="modal-overlay" id="modal">
@@ -750,18 +709,15 @@
     <script>
         // State
         let names = [];
-        let drawnNames = [];
         let originalNames = [];
-        let isSpinning = false;
+        let drawnNames = [];
         let currentRotation = 0;
+        let isSpinning = false;
 
-        // Color palette - elegant and distinct
+        // Kleuren (afgestemd op nieuwe stijl)
         const colors = [
-            '#E63946', '#F4A261', '#2A9D8F', '#264653', '#E9C46A',
-            '#9B5DE5', '#00BBF9', '#00F5D4', '#FEE440', '#F15BB5',
-            '#7209B7', '#3A0CA3', '#4361EE', '#4CC9F0', '#80ED99',
-            '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
-            '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9'
+            '#10b981', '#0ea5e9', '#8b5cf6', '#f59e0b', 
+            '#ef4444', '#ec4899', '#14b8a6', '#6366f1'
         ];
 
         // Elements
@@ -769,49 +725,38 @@
         const ctx = canvas.getContext('2d');
         const nameInput = document.getElementById('nameInput');
         const addBtn = document.getElementById('addBtn');
+        const namesList = document.getElementById('namesList');
+        const namesCount = document.getElementById('namesCount');
         const spinBtn = document.getElementById('spinBtn');
         const resetBtn = document.getElementById('resetBtn');
         const clearBtn = document.getElementById('clearBtn');
-        const namesList = document.getElementById('namesList');
         const drawnList = document.getElementById('drawnList');
-        const namesCount = document.getElementById('namesCount');
         const modal = document.getElementById('modal');
         const winnerName = document.getElementById('winnerName');
         const closeModal = document.getElementById('closeModal');
-
-        // Initialize stars
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starsContainer.appendChild(star);
-            }
-        }
 
         // Draw wheel
         function drawWheel() {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            const radius = canvas.width / 2 - 10;
+            const radius = canvas.width / 2 - 20;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             if (names.length === 0) {
                 // Empty state
-                ctx.fillStyle = '#1a1a2e';
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+                ctx.fillStyle = '#f1f5f9';
                 ctx.fill();
-                
-                ctx.fillStyle = 'rgba(212, 175, 55, 0.3)';
-                ctx.font = '24px Quicksand';
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '500 24px DM Sans';
                 ctx.textAlign = 'center';
-                ctx.fillText('Voeg namen toe', centerX, centerY - 10);
-                ctx.fillText('om te beginnen', centerX, centerY + 20);
+                ctx.fillText('Voeg namen toe', centerX, centerY);
                 return;
             }
 
@@ -829,27 +774,26 @@
                 ctx.fillStyle = colors[i % colors.length];
                 ctx.fill();
 
-                // Draw border
-                ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+                // Border
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
                 ctx.lineWidth = 2;
                 ctx.stroke();
 
-                // Draw text
+                // Text
                 ctx.save();
                 ctx.translate(centerX, centerY);
                 ctx.rotate(startAngle + sliceAngle / 2);
                 ctx.textAlign = 'right';
                 ctx.fillStyle = '#fff';
-                ctx.font = `bold ${Math.min(24, 400 / names.length)}px Quicksand`;
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-                ctx.shadowBlur = 4;
+                ctx.font = `600 ${Math.min(22, 360 / names.length)}px DM Sans`;
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+                ctx.shadowBlur = 3;
                 
-                // Truncate long names
                 let displayName = name;
                 if (displayName.length > 12) {
                     displayName = displayName.substring(0, 11) + '…';
                 }
-                ctx.fillText(displayName, radius - 20, 6);
+                ctx.fillText(displayName, radius - 25, 6);
                 ctx.restore();
             });
         }
@@ -889,7 +833,7 @@
         function updateDrawnList() {
             if (drawnNames.length === 0) {
                 drawnList.innerHTML = `
-                    <div class="empty-results">
+                    <div class="empty-state">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <circle cx="12" cy="12" r="10"/>
                             <path d="M12 6v6l4 2"/>
@@ -907,11 +851,10 @@
             }
         }
 
-        // Add name(s) - supports multiple names separated by comma or semicolon
+        // Add name(s)
         function addName() {
             const input = nameInput.value;
-            // Split by comma or semicolon
-            const newNames = input.split(/[,;]/)
+            const newNames = input.split(',')
                 .map(n => n.trim())
                 .filter(n => n && !names.includes(n));
             
@@ -936,34 +879,41 @@
             drawWheel();
         }
 
-        // Spin wheel
+        // Spin wheel - BUG FIX: bereken winnaar op basis van waar het rad eindigt
         function spin() {
             if (isSpinning || names.length < 2) return;
             
             isSpinning = true;
             spinBtn.disabled = true;
 
-            // Calculate random winner
-            const winnerIndex = Math.floor(Math.random() * names.length);
             const sliceAngle = 360 / names.length;
             
-            // Calculate rotation to land on winner
-            // The pointer is at the top (270 degrees or -90 degrees from 0)
-            // We need to rotate so the winner slice is at the top
-            const targetAngle = 270 - (winnerIndex * sliceAngle) - (sliceAngle / 2);
-            const spins = 5 + Math.random() * 3; // 5-8 full rotations
-            const totalRotation = spins * 360 + targetAngle - (currentRotation % 360);
+            // Draai 5-8 keer rond plus een willekeurige extra hoek
+            const spins = 5 + Math.random() * 3;
+            const extraAngle = Math.random() * 360;
+            const totalRotation = spins * 360 + extraAngle;
 
             currentRotation += totalRotation;
-
             canvas.style.transform = `rotate(${currentRotation}deg)`;
 
-            // Show winner after animation
+            // Bepaal winnaar NADAT de rotatie is berekend
             setTimeout(() => {
+                // Normaliseer de rotatie naar 0-360
+                const normalizedRotation = currentRotation % 360;
+                
+                // De pointer staat bovenaan (270 graden in canvas coördinaten)
+                // Bereken welke slice onder de pointer ligt
+                // Canvas draait met de klok mee, dus we moeten 270 - rotatie berekenen
+                let pointerAngle = (270 - normalizedRotation) % 360;
+                if (pointerAngle < 0) pointerAngle += 360;
+                
+                // Bepaal de winnaar index
+                const winnerIndex = Math.floor(pointerAngle / sliceAngle) % names.length;
                 const winner = names[winnerIndex];
+                
                 winnerName.textContent = winner;
                 modal.classList.add('active');
-                createConfetti();
+                createFlashEffect();
 
                 // Remove winner from pool
                 drawnNames.push(winner);
@@ -977,12 +927,17 @@
             }, 4100);
         }
 
-        // Reset all (bring back drawn names)
+        // Reset all
         function resetAll() {
             names = [...originalNames];
             drawnNames = [];
+            // Reset rotatie volledig
             currentRotation = 0;
+            canvas.style.transition = 'none';
             canvas.style.transform = 'rotate(0deg)';
+            // Forceer reflow voor transition reset
+            canvas.offsetHeight;
+            canvas.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
             updateNamesList();
             updateDrawnList();
             drawWheel();
@@ -994,43 +949,71 @@
             drawnNames = [];
             originalNames = [];
             currentRotation = 0;
+            canvas.style.transition = 'none';
             canvas.style.transform = 'rotate(0deg)';
+            canvas.offsetHeight;
+            canvas.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
             updateNamesList();
             updateDrawnList();
             drawWheel();
         }
 
-        // Confetti effect
-        function createConfetti() {
-            const colors = ['#D4AF37', '#F4E4BA', '#E63946', '#2A9D8F', '#9B5DE5', '#00BBF9'];
+        // Flash/strobe effect
+        function createFlashEffect() {
+            const flash = document.createElement('div');
+            flash.className = 'flash-overlay';
+            document.body.appendChild(flash);
             
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.cssText = `
-                    left: ${Math.random() * 100}vw;
-                    top: -20px;
-                    width: ${Math.random() * 10 + 5}px;
-                    height: ${Math.random() * 10 + 5}px;
-                    background: ${colors[Math.floor(Math.random() * colors.length)]};
-                    border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
-                    animation: fall ${Math.random() * 2 + 2}s linear forwards;
-                `;
-                document.body.appendChild(confetti);
-                
-                setTimeout(() => confetti.remove(), 4000);
-            }
+            // Trigger reflow
+            flash.offsetHeight;
+            flash.classList.add('active');
+            
+            setTimeout(() => {
+                flash.classList.remove('active');
+                setTimeout(() => flash.remove(), 300);
+            }, 150);
+            
+            // Second flash
+            setTimeout(() => {
+                const flash2 = document.createElement('div');
+                flash2.className = 'flash-overlay';
+                document.body.appendChild(flash2);
+                flash2.offsetHeight;
+                flash2.classList.add('active');
+                setTimeout(() => {
+                    flash2.classList.remove('active');
+                    setTimeout(() => flash2.remove(), 300);
+                }, 100);
+            }, 200);
+            
+            // Third flash
+            setTimeout(() => {
+                const flash3 = document.createElement('div');
+                flash3.className = 'flash-overlay';
+                document.body.appendChild(flash3);
+                flash3.offsetHeight;
+                flash3.classList.add('active');
+                setTimeout(() => {
+                    flash3.classList.remove('active');
+                    setTimeout(() => flash3.remove(), 300);
+                }, 80);
+            }, 350);
 
-            // Add confetti animation
-            if (!document.getElementById('confetti-style')) {
+            if (!document.getElementById('flash-style')) {
                 const style = document.createElement('style');
-                style.id = 'confetti-style';
+                style.id = 'flash-style';
                 style.textContent = `
-                    @keyframes fall {
-                        to {
-                            transform: translateY(100vh) rotate(720deg);
-                            opacity: 0;
-                        }
+                    .flash-overlay {
+                        position: fixed;
+                        inset: 0;
+                        background: var(--accent);
+                        opacity: 0;
+                        pointer-events: none;
+                        z-index: 150;
+                        transition: opacity 0.15s ease-out;
+                    }
+                    .flash-overlay.active {
+                        opacity: 0.3;
                     }
                 `;
                 document.head.appendChild(style);
@@ -1051,7 +1034,6 @@
         });
 
         // Initialize
-        createStars();
         updateNamesList();
         updateDrawnList();
         drawWheel();
