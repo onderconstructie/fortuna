@@ -104,7 +104,7 @@
 
         .main-grid {
             display: grid;
-            grid-template-columns: 280px 1fr 240px;
+            grid-template-columns: 320px 1fr 240px;
             gap: 2rem;
             align-items: start;
         }
@@ -582,7 +582,7 @@
                 <p class="card-title">Deelnemers</p>
                 
                 <div class="input-group">
-                    <input type="text" class="input-field" id="nameInput" placeholder="Naam of namen, komma-gescheiden" autocomplete="off">
+                    <input type="text" class="input-field" id="nameInput" placeholder="Vul namen in (met komma's tussen)" autocomplete="off">
                     <button class="btn btn-primary btn-icon" id="addBtn" title="Toevoegen">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M12 5v14M5 12h14"/>
@@ -721,11 +721,6 @@
                 ctx.strokeStyle = '#e2e8f0';
                 ctx.lineWidth = 2;
                 ctx.stroke();
-
-                ctx.fillStyle = '#94a3b8';
-                ctx.font = '500 24px DM Sans';
-                ctx.textAlign = 'center';
-                ctx.fillText('Voeg namen toe', centerX, centerY);
                 return;
             }
 
