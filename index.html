@@ -431,7 +431,9 @@ function ocPickProject(st, arr, cur = 'current') { const p = ocProject(''); if (
      ]);                                   // aanroepen na elke bewaring
      ocShare.clear('raci');                // bij "Alles wissen"
      const gekozen = await ocShare.pick({ types:['betrokkene'], self:'weerstand', title:'Doelgroepen overnemen' });
-     // geeft [] terug bij annuleren, anders de aangevinkte items (met .source en .list erbij)
+     // geeft [] terug bij annuleren, anders de aangevinkte items (met .source, .bronId en .list erbij)
+     // Afspraak: een tool geeft wat ze overnam (bronId) NIET opnieuw door, tenzij ze er een eigen oordeel aan toevoegde
+     // (een score, een eigenaar, een datum). Zo blijft de bron de baas en komt wat daar verwijderd is niet terug.
      ocShare.pick({ ..., have:['Budget goedkeuren'] })  // optioneel: wat de tool al heeft, staat uitgegrijsd ("staat er al")
      ocShare.pick({ ..., vink:false })    // niets vooraf aanvinken;  notes:false  toont geen notities (voor wie alleen namen neemt)
      window.ocHave = types => [...]       // optioneel per tool: dan telt de knop "Overnemen uit andere tools" alleen wat nieuw is
@@ -587,7 +589,7 @@ const ocShare = (() => {
       document.addEventListener('keydown', onKey, true);
       back.querySelector('.ocs-cancel').addEventListener('click', () => close([]));
       ok.addEventListener('click', () => close(boxes().filter(b => b.checked).map(b => {
-        const s = src[+b.dataset.s]; return { ...s.items[+b.dataset.i], source: s.tool, list: s.list };
+        const s = src[+b.dataset.s]; return { ...s.items[+b.dataset.i], source: s.tool, bronId: s.id, list: s.list };
       })));
       const first = back.querySelector('input:not(:disabled),.ocs-cancel'); first && first.focus();
     });
@@ -680,6 +682,12 @@ function load() {
       const all = schoon([].concat(Array.isArray(d.all) ? d.all : Array.isArray(d.originalNames) ? d.originalNames : Array.isArray(d.names) ? d.names : [], drawn)).slice(0, MAX);
       const s = { all, drawn: drawn.map(n => all.find(a => lc(a) === lc(n))).filter(Boolean) };
       if (d.voorbeeld === true && all.length) s.voorbeeld = true;
+      // Herkomst: { naam in kleine letters: id van de tool waaruit hij overgenomen werd }, alleen voor wie er nog in staat
+      if (d.van && typeof d.van === 'object' && !Array.isArray(d.van)) {
+        const h = new Set(all.map(lc)), v = {};
+        Object.keys(d.van).forEach(k => { if (h.has(k) && typeof d.van[k] === 'string') v[k] = d.van[k]; });
+        if (Object.keys(v).length) s.van = v;
+      }
       return s;
     }
   } catch {}
@@ -692,9 +700,12 @@ function save() {
   ocPublish();
 }
 // Deelnemers liggen klaar als 'betrokkene' voor andere tools. Een voorbeeld gaat nooit mee.
+// Wie uit een andere tool overgenomen werd (state.van), geven we niet opnieuw door: de bron blijft de baas.
+// Het rad voegt geen oordeel toe dat een andere tool gebruikt. Alleen zelf getypte namen gaan mee.
 function ocPublish() {
-  if (state.voorbeeld || !state.all.length) ocShare.clear(OC_ID);
-  else ocShare.publish(OC_ID, OC_TOOL, [{ name: ocProject('Deelnemers'), items: state.all.map(n => ({ type: 'betrokkene', text: n })) }]);
+  const eigen = state.voorbeeld ? [] : state.all.filter(n => !(state.van && state.van[lc(n)]));
+  if (!eigen.length) ocShare.clear(OC_ID);
+  else ocShare.publish(OC_ID, OC_TOOL, [{ name: ocProject('Deelnemers'), items: eigen.map(n => ({ type: 'betrokkene', text: n })) }]);
 }
 const snapshot = () => { const c = JSON.parse(JSON.stringify(state)); return () => { state = c; shown = null; }; };
 const pool = () => { const g = new Set(state.drawn.map(lc)); return state.all.filter(n => !g.has(lc(n))); };
@@ -863,6 +874,7 @@ function voegToe(lijst) {
     have.add(lc(nm)); nieuw.push(nm);
   });
   if (nieuw.length) { state.all = state.all.concat(nieuw); shown = null; }
+  if (state.van) nieuw.forEach(nm => { delete state.van[lc(nm)]; });   // wat net bijkwam is eigen werk, tenzij het overnemen het hierna markeert
   return { nieuw, dubbel, vol };
 }
 $('add-form').addEventListener('submit', e => {
@@ -883,7 +895,7 @@ $('names').addEventListener('click', e => {
     const nm = x.dataset.remove, restore = snapshot();
     const li = x.closest('li'), volgende = li && (li.nextElementSibling || li.previousElementSibling);
     const ander = volgende && volgende.querySelector('[data-remove]') ? volgende.querySelector('[data-remove]').dataset.remove : null;
-    state.all = state.all.filter(a => a !== nm); shown = null; save(); render();
+    state.all = state.all.filter(a => a !== nm); if (state.van) delete state.van[lc(nm)]; shown = null; save(); render();
     const f = ander && [...document.querySelectorAll('[data-remove]')].find(b => b.dataset.remove === ander);
     (f || $('name-in')).focus({ preventScroll: true });
     toast(`${nm} verwijderd`, restore);
@@ -926,7 +938,12 @@ $('import-btn').addEventListener('click', async () => {
   const picked = await ocShare.pick({ types: ['betrokkene'], self: OC_ID, title: 'Namen overnemen', intro: 'Kies wie mee in het rad gaat. Wie er al in staat, komt er niet twee keer in.', have: al, notes: false });
   if (!picked.length || spinning) return;
   const restore = snapshot(), r = voegToe(picked.map(x => x.text));
-  if (r.nieuw.length) { save(); render(); }
+  if (r.nieuw.length) {
+    const bron = new Map(picked.map(x => [lc(String(x.text).replace(/\s+/g, ' ')), x.bronId || x.source || 'ander']));
+    state.van = state.van || {};
+    r.nieuw.forEach(nm => { state.van[lc(nm)] = bron.get(lc(nm)) || 'ander'; });
+    save(); render();
+  }
   const n = r.nieuw.length;
   toast(ocOvergenomen(n, alTel + r.dubbel, 'naam', 'namen') + (r.vol ? ` Maximaal ${MAX} namen.` : ''), n ? restore : undefined);
   $('import-btn').focus({ preventScroll: true });
