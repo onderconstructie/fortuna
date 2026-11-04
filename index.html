@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#ffffff">
     <title>Nomen Fortuna – Onder Constructie</title>
     <meta name="description" content="Trek willekeurig namen uit een groep. Ideaal voor beurten, teamindelingen of loting.">
@@ -10,753 +10,403 @@
     <meta name="oc:labels" content="vergaderen">
     <meta name="oc:kort" content="Wie begint? Trek een naam">
     <meta name="oc:volgorde" content="70">
+    <meta name="oc:opslag" content="fortuna.v1, oc.share.fortuna">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23f8fafc' stroke='%23e2e8f0' stroke-width='1.5'/%3E%3Cpath d='M20 22L14.50 12.47A11 11 0 0 1 25.50 12.47Z' fill='%2310b981'/%3E%3Cpath d='M20 22L25.50 12.47A11 11 0 0 1 31.00 22.00Z' fill='%23e2e8f0'/%3E%3Cpath d='M20 22L31.00 22.00A11 11 0 0 1 25.50 31.53Z' fill='%23cbd5e1'/%3E%3Cpath d='M20 22L25.50 31.53A11 11 0 0 1 14.50 31.53Z' fill='%23e2e8f0'/%3E%3Cpath d='M20 22L14.50 31.53A11 11 0 0 1 9.00 22.00Z' fill='%23cbd5e1'/%3E%3Cpath d='M20 22L9.00 22.00A11 11 0 0 1 14.50 12.47Z' fill='%23e2e8f0'/%3E%3Ccircle cx='20' cy='22' r='11' stroke='%2394a3b8' stroke-width='1.5'/%3E%3Ccircle cx='20' cy='22' r='2.2' fill='%23fff' stroke='%2394a3b8' stroke-width='1.2'/%3E%3Cpath d='M16.5 6.5h7L20 12z' fill='%23047857' stroke='%23047857' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="/fonts/fonts.css">
+    <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/dm-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         :root {
-            --slate-900: #0f172a;
-            --slate-800: #1e293b;
-            --slate-700: #334155;
-            --slate-600: #475569;
-            --slate-500: #64748b;
-            --slate-400: #94a3b8;
-            --slate-300: #cbd5e1;
-            --slate-200: #e2e8f0;
-            --slate-100: #f1f5f9;
-            --slate-50: #f8fafc;
-            --wit: #ffffff;
-            --accent: #10b981;
-            --accent-light: #d1fae5;
-            --danger: #ef4444;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'DM Sans', system-ui, sans-serif;
-            background: var(--slate-50);
-            color: var(--slate-700);
-            line-height: 1.6;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Header */
-        .header {
-            padding: 3rem 2rem 4rem;
-            text-align: center;
-            background: var(--wit);
-            border-bottom: 1px solid var(--slate-200);
-            position: relative;
-        }
-
-        .back-link {
-            position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            color: var(--slate-400);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .back-link:hover {
-            color: var(--accent);
-        }
-
-        .back-link svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .logo {
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        .logo svg {
-            width: 80px;
-            height: 80px;
-        }
-
-        .site-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--slate-800);
-            letter-spacing: -0.03em;
-            margin-bottom: 0.5rem;
-        }
-
-        .site-subtitle {
-            font-size: 1.125rem;
-            color: var(--slate-500);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* Main */
-        .main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 3rem 2rem 4rem;
-        }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 320px 1fr 240px;
-            gap: 2rem;
-            align-items: start;
-        }
-
-        @media (max-width: 900px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Cards */
-        .card {
-            background: var(--wit);
-            border-radius: 12px;
-            padding: 1.5rem;
-            border: 1.5px solid var(--slate-200);
-        }
-
-        .card-title {
-            font-size: 0.6875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--slate-400);
-            margin-bottom: 1rem;
-        }
-
-        /* Input */
-        .input-group {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .input-field {
-            flex: 1;
-            padding: 0.75rem 0.75rem;
-            font-size: 0.9375rem;
-            font-family: inherit;
-            border: 1.5px solid var(--slate-200);
-            border-radius: 8px;
-            background: var(--wit);
-            color: var(--slate-800);
-            transition: border-color 0.2s;
-            min-width: 0;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .input-field::placeholder {
-            color: var(--slate-400);
-            font-size: 0.8125rem;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1rem;
-            border: none;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--wit);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .btn-secondary {
-            background: var(--slate-100);
-            color: var(--slate-600);
-            border: 1px solid var(--slate-200);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--slate-300);
-            color: var(--slate-700);
-        }
-
-        .btn-danger {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-
-        .btn-danger:hover {
-            background: rgba(239, 68, 68, 0.15);
-        }
-
-        .btn-icon {
-            padding: 0.75rem;
-        }
-
-        /* Names list */
-        .names-list {
-            max-height: 280px;
-            overflow-y: auto;
-            margin-bottom: 1rem;
-        }
-
-        .names-list::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .names-list::-webkit-scrollbar-track {
-            background: var(--slate-100);
-            border-radius: 2px;
-        }
-
-        .names-list::-webkit-scrollbar-thumb {
-            background: var(--slate-300);
-            border-radius: 2px;
-        }
-
-        .name-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.625rem 0.75rem;
-            background: var(--slate-50);
-            border-radius: 6px;
-            margin-bottom: 0.5rem;
-        }
-
-        .name-color {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .name-text {
-            flex: 1;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--slate-700);
-        }
-
-        .name-remove {
-            background: none;
-            border: none;
-            color: var(--slate-400);
-            cursor: pointer;
-            padding: 0.25rem;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-
-        .name-remove:hover {
-            color: var(--danger);
-            background: rgba(239, 68, 68, 0.1);
-        }
-
-        .name-remove svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .names-count {
-            text-align: center;
-            font-size: 0.8125rem;
-            color: var(--slate-400);
-            margin-bottom: 1rem;
-        }
-
-        .action-row {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .action-row .btn {
-            flex: 1;
-            font-size: 0.75rem;
-            padding: 0.625rem 0.5rem;
-        }
-
-        /* Wheel */
-        .wheel-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .wheel-container {
-            position: relative;
-            width: 100%;
-            max-width: 380px;
-            aspect-ratio: 1;
-            margin-bottom: 1.5rem;
-        }
-
-        .wheel-outer {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background: var(--slate-200);
-            padding: 6px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .wheel-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: var(--wit);
-            position: relative;
-            overflow: hidden;
-        }
-
-        #wheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-        }
-
-        .wheel-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70px;
-            height: 70px;
-            background: var(--wit);
-            border: 3px solid var(--slate-200);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-        }
-
-        .wheel-center svg {
-            width: 28px;
-            height: 28px;
-            color: var(--accent);
-        }
-
-        .pointer {
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 20;
-        }
-
-        .pointer svg {
-            width: 32px;
-            height: 40px;
-            color: var(--accent);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-        }
-
-        .btn-spin {
-            width: 100%;
-            max-width: 380px;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-        }
-
-        /* Empty state */
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            color: var(--slate-400);
-            text-align: center;
-        }
-
-        .empty-state svg {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 0.75rem;
-            opacity: 0.5;
-        }
-
-        .empty-state p {
-            font-size: 0.875rem;
-        }
-
-        /* Drawn list */
-        .drawn-list {
-            min-height: 200px;
-        }
-
-        .drawn-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.625rem 0.75rem;
-            background: var(--accent-light);
-            border-radius: 6px;
-            margin-bottom: 0.5rem;
-        }
-
-        .drawn-number {
-            width: 24px;
-            height: 24px;
-            background: var(--accent);
-            color: var(--wit);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .drawn-name {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--slate-700);
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            z-index: 100;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal {
-            background: var(--wit);
-            border-radius: 16px;
-            padding: 2.5rem;
-            text-align: center;
-            max-width: 360px;
-            width: 100%;
-            transform: translateY(20px) scale(0.95);
-            transition: all 0.3s;
-        }
-
-        .modal-overlay.active .modal {
-            transform: translateY(0) scale(1);
-        }
-
-        .modal-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--accent-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-        }
-
-        .modal-icon svg {
-            width: 32px;
-            height: 32px;
-            color: var(--accent);
-        }
-
-        .modal-title {
-            font-size: 0.875rem;
-            color: var(--slate-500);
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-name {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--slate-800);
-            margin-bottom: 1.5rem;
-        }
-
-        .modal .btn {
-            width: 100%;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid var(--slate-200);
-            background: var(--wit);
-        }
-
-        .quote {
-            font-size: 0.8125rem;
-            color: var(--accent);
-        }
-
-        @media (max-width: 640px) {
-            .header {
-                padding: 2rem 1.5rem 3rem;
-            }
-
-            .site-title {
-                font-size: 1.625rem;
-            }
-
-            .main {
-                padding: 2rem 1.25rem 3rem;
-            }
-        }
-    
-        /* Onder Constructie: gedeelde footer en quote (huisstijl) */
-        footer.oc-footer {
-            text-align: center;
-            padding: 2rem 1.5rem calc(env(safe-area-inset-bottom, 0px) + 2rem);
-            margin-top: 2rem;
-            border-top: 1px solid #e2e8f0;
-            background: #ffffff;
-            color: #10b981;
-        }
-
-        footer.oc-footer .oc-quote {
-            font-size: 0.8125rem;
-            line-height: 1.5;
-            color: #10b981;
-            opacity: 1;
-            font-style: normal;
-            margin: 0;
-        }
-    
-        /* Overnemen uit een andere tool */
-        .oc-import {
-            display: inline-flex; align-items: center; gap: 0.375rem; margin: -0.5rem 0 0.875rem;
-            font: inherit; font-size: 0.8125rem; font-weight: 600; color: #059669;
-            background: none; border: 0; padding: 0.25rem 0.375rem; border-radius: 6px; cursor: pointer;
-        }
-        @media (hover: hover) { .oc-import:hover { background: #d1fae5; } }
-        .oc-import:focus-visible { outline: 2px solid #10b981; outline-offset: 2px; }
-        .oc-import svg { width: 15px; height: 15px; }
-        .oc-import[hidden] { display: none; }
-
-        .oc-toast {
-            position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem); z-index: 1000;
-            transform: translate(-50%, calc(100% + 3rem)); visibility: hidden;
-            background: #1e293b; color: #fff; border-radius: 12px; padding: 0.625rem 1rem; font-size: 0.9375rem;
-            box-shadow: 0 10px 30px rgba(15,23,42,0.25); max-width: calc(100% - 2rem);
-            transition: transform 0.25s ease, visibility 0s 0.25s;
-        }
-        .oc-toast.show { transform: translate(-50%, 0); visibility: visible; transition: transform 0.25s ease; }
-    
-        /* ===== Huisstijl oktober 2026: kop (patroon B), contrast, focus, tikdoelen ===== */
-        .oc-head { display:block; text-align:center; background:#fff; border-bottom:1px solid #e2e8f0; padding:1.5rem 1.25rem 1.75rem; position:relative; }
-        .oc-head .back-link { position:absolute; top:0.875rem; left:1rem; min-height:44px; display:inline-flex; align-items:center; gap:0.5rem; padding:0 0.5rem; margin:0; font-size:0.875rem; color:#64748b; text-decoration:none; border-radius:8px; transition:color 0.2s; }
-        .oc-head .back-link:hover { color:#047857; }
-        .oc-head .back-link svg { width:16px; height:16px; flex:none; }
-        .oc-head .logo { display:block; width:56px; height:56px; margin:0 auto; }
-        .oc-head .logo svg { display:block; width:56px; height:56px; }
-        .oc-head .title { font-size:1.625rem; font-weight:700; color:#1e293b; letter-spacing:-0.03em; line-height:1.2; margin:0.5rem 0 0.25rem; }
-        .oc-head .subtitle { font-size:0.9375rem; color:#64748b; max-width:520px; margin:0 auto; }
-        @media (max-width:640px) {
-            .oc-head { padding-top:0.5rem; }
-            .oc-head .back-link { position:static; margin:0 auto 0.375rem; }
-        }
-        footer.oc-footer, footer.oc-footer .oc-quote, .footer .quote { color:#047857; }
-        :focus-visible { outline:2px solid #047857 !important; outline-offset:2px; }
-        input[type=range]:focus-visible { outline:2px solid #047857 !important; outline-offset:4px; }
-        .oc-import { color:#047857; min-height:44px; }
-        .oc-import:focus-visible { outline-color:#047857; }
+            --slate-50:#f8fafc; --slate-100:#f1f5f9; --slate-200:#e2e8f0; --slate-300:#cbd5e1; --slate-400:#94a3b8;
+            --slate-500:#64748b; --slate-600:#475569; --slate-700:#334155; --slate-800:#1e293b; --wit:#ffffff;
+            --accent:#10b981; --accent-dark:#047857; --accent-hover:#065f46; --accent-light:#d1fae5; --accent-50:#ecfdf5;
+            --rood:#dc2626;
+            --bottom: env(safe-area-inset-bottom, 0px);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        [hidden] { display:none !important; }
+        body { font-family:'DM Sans', system-ui, sans-serif; background:var(--slate-50); color:var(--slate-700); line-height:1.5; min-height:100vh; min-height:100dvh; -webkit-font-smoothing:antialiased; display:flex; flex-direction:column; }
+        button, input { font:inherit; color:inherit; }
+        button { background:none; border:0; cursor:pointer; }
         .sr-only { position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-        .main-grid { grid-template-columns:minmax(0,320px) minmax(0,1fr) minmax(0,240px); }
-        @media (max-width:900px) { .main-grid { grid-template-columns:minmax(0,1fr); } }
-        .main-grid > * { min-width:0; }
-        .input-group { display:flex; }
-        .input-group .input-field { flex:1; min-width:0; }
-        .card-title, .names-count, .empty-state { color:#64748b; }
-        .btn { min-height:44px; border-radius:10px; }
-        .btn-primary { background:#047857; color:#fff; min-height:44px; border-radius:10px; font-size:15px; padding:0 1.25rem; }
-        .btn-primary:hover:not(:disabled) { background:#065f46; transform:none; box-shadow:none; }
-        .btn-primary.btn-icon { min-width:44px; width:44px; padding:0; flex:none; }
-        .btn-spin { padding:0 1.25rem; font-size:15px; }
-        .btn-danger { color:#b91c1c; }
-        .action-row .btn { min-height:44px; font-size:0.8125rem; white-space:nowrap; min-width:0; }
-        .name-item { padding-top:0; padding-bottom:0; min-height:44px; }
-        .name-text { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-        .name-remove { width:44px; height:44px; margin-right:-0.625rem; display:flex; align-items:center; justify-content:center; flex:none; }
-        .drawn-number { background:#047857; flex:none; }
-        .drawn-name { min-width:0; overflow-wrap:anywhere; }
-        .modal-name { overflow-wrap:anywhere; }
-        @media (max-width:640px) { .main { padding:1.5rem 1rem 3rem; } }
-        /* alleen cosmetisch: kortere lijst op gsm, voet tot onderaan */
-        @media (max-width:900px) { .names-list { max-height:220px; } }
-        body { display:flex; flex-direction:column; }
-        body > main { flex:1 0 auto; width:100%; }
-        footer.oc-footer { margin-top:auto; }
-    </style>
+        /* Kop: zoals in de andere tools */
+        header.header, .oc-head { display:block; background:#fff; border-bottom:1px solid #e2e8f0; padding:1.5rem 1.25rem 1.75rem; position:relative; text-align:center; }
+        header.header .back-link, .oc-head .back-link { position:absolute; top:1.25rem; left:1.25rem; display:inline-flex; align-items:center; gap:0.5rem; min-height:44px; min-width:44px; padding:0; margin:0; font-size:0.875rem; font-weight:400; color:#64748b; text-decoration:none; background:none; border-radius:8px; transition:color 0.2s; }
+        header.header .back-link:hover, .oc-head .back-link:hover { color:#047857; }
+        header.header .back-link svg, .oc-head .back-link svg { width:16px; height:16px; flex:none; }
+        header.header .logo, .oc-head .logo { display:block; width:56px; height:63px; margin:0 auto; }
+        header.header .logo svg, .oc-head .logo svg { display:block; width:56px; height:56px; }
+        header.header h1, .oc-head h1 { font-size:1.625rem; font-weight:700; color:#1e293b; letter-spacing:-0.03em; line-height:1.2; margin:0.5rem 0 0; }
+        header.header h1 + p, .oc-head h1 + p { font-size:0.9375rem; color:#64748b; max-width:34rem; margin:0.125rem auto 0; line-height:1.5; }
+        @media (max-width:640px) {
+            header.header .back-link, .oc-head .back-link { position:static; display:flex; justify-content:center; margin:0 auto 0.75rem; width:max-content; }
+        }
+
+        /* Raster: deelnemers | rad | getrokken */
+        .main { flex:1 0 auto; width:100%; max-width:1120px; margin:0 auto; padding:1.5rem clamp(1rem, 2.5vw, 2rem) 3rem; }
+        .main-grid { display:grid; gap:1.5rem; align-items:start; grid-template-columns:minmax(0, 300px) minmax(0, 1fr) minmax(0, 260px); grid-template-areas:"names wheel drawn"; }
+        .names-card { grid-area:names; }
+        .wheel-section { grid-area:wheel; }
+        .drawn-card { grid-area:drawn; }
+        @media (max-width:999.98px) {
+            .main-grid { grid-template-columns:minmax(0, 1fr) minmax(0, 1.15fr); grid-template-areas:"names wheel" "drawn wheel"; }
+        }
+        @media (max-width:699.98px) {
+            .main-grid { grid-template-columns:minmax(0, 1fr); grid-template-areas:"names" "wheel" "drawn"; gap:1.25rem; }
+        }
+
+        .card { background:var(--wit); border:1px solid var(--slate-200); border-radius:16px; padding:1.25rem; box-shadow:0 1px 2px rgba(15,23,42,0.04); min-width:0; }
+        .card-title { font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--slate-500); }
+        .card-title .n { font-weight:500; letter-spacing:0; text-transform:none; font-variant-numeric:tabular-nums; }
+        .card-head { display:flex; align-items:center; justify-content:space-between; gap:0.5rem; min-height:44px; margin:-0.75rem -0.75rem 0.5rem 0; }
+        .card-head-plain { margin:-0.25rem 0 0.75rem; min-height:0; }
+
+        /* Namen toevoegen */
+        .input-group { display:flex; gap:0.5rem; }
+        .input-field { flex:1; min-width:0; min-height:44px; padding:0.625rem 0.875rem; border:1.5px solid var(--slate-200); border-radius:10px; background:var(--slate-50); color:var(--slate-800); font-size:0.9375rem; outline:none; transition:border-color 0.15s, background 0.15s; }
+        .input-field:focus { border-color:var(--accent); background:var(--wit); }
+        .input-field::placeholder { color:#64748b; }
+        .add-btn { flex:none; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:10px; background:var(--accent-dark); color:#fff; }
+        .add-btn:hover { background:var(--accent-hover); }
+        .add-btn svg { width:18px; height:18px; }
+        .import-row { margin-top:0.75rem; }
+        button.oc-import { color:#047857; min-height:44px; }
+
+        /* Lijst met namen in het rad */
+        .names-list { list-style:none; margin-top:0.875rem; max-height:min(420px, 48vh); overflow-y:auto; overscroll-behavior:contain; }
+        .name-item { display:flex; align-items:center; gap:0.625rem; min-height:44px; padding-left:0.75rem; background:var(--slate-50); border-radius:10px; }
+        .name-item + .name-item { margin-top:0.375rem; }
+        .name-dot { flex:none; width:12px; height:12px; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(15,23,42,0.18); }
+        .name-text { flex:1; min-width:0; font-size:0.9375rem; font-weight:500; color:var(--slate-800); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .name-remove { flex:none; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:10px; color:var(--slate-500); }
+        .name-remove:hover { color:var(--rood); background:#fef2f2; }
+        .name-remove svg { width:16px; height:16px; }
+        .names-count { margin-top:0.625rem; text-align:center; font-size:0.8125rem; color:var(--slate-500); font-variant-numeric:tabular-nums; }
+        .all-done { margin-top:0.875rem; padding:0.875rem 0.75rem; border-radius:10px; background:var(--slate-50); text-align:center; font-size:0.9375rem; color:var(--slate-600); }
+
+        /* Leeg begin: zoals in de andere tools */
+        .empty { padding:1.5rem 0.5rem 0.5rem; text-align:center; color:var(--slate-500); font-size:0.9375rem; }
+        .empty strong { display:block; color:var(--slate-600); font-weight:600; margin-bottom:0.25rem; }
+        .oc-start-btns { display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; margin-top:0.875rem; }
+        .oc-start-btns .oc-begin, .oc-start-btns .oc-vb { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:0.5rem 1rem; border:0; border-radius:10px; font:inherit; font-weight:600; font-size:0.9375rem; line-height:1.3; cursor:pointer; text-align:center; }
+        .oc-start-btns .oc-begin { background:#047857; color:#fff; }
+        .oc-start-btns .oc-begin:hover { background:#065f46; }
+        .oc-start-btns .oc-vb { background:#f1f5f9; color:#334155; }
+        .oc-start-btns .oc-vb:hover { background:#e2e8f0; }
+        .oc-open-row { display:flex; justify-content:center; margin:0.5rem 0 0; }
+        .oc-open-row .oc-open-link { display:inline-flex; align-items:center; gap:0.5rem; min-height:44px; padding:0.5rem 1rem; border:0; background:none; border-radius:10px; font:inherit; font-size:0.875rem; font-weight:600; color:#047857; cursor:pointer; text-decoration:none; }
+        .oc-open-row .oc-open-link:hover { background:#ecfdf5; }
+        .oc-open-row .oc-open-link svg { width:18px; height:18px; flex:none; }
+
+        /* Rad */
+        .wheel-section { display:flex; flex-direction:column; align-items:center; min-width:0; }
+        .wheel { position:relative; width:100%; max-width:420px; aspect-ratio:1; }
+        .wheel-ring { position:absolute; inset:0; border-radius:50%; background:#fff; border:1px solid var(--slate-200); padding:8px; overflow:hidden; box-shadow:0 1px 2px rgba(15,23,42,0.04), 0 16px 36px -22px rgba(15,23,42,0.35); }
+        #wheel { display:block; width:100%; height:100%; border-radius:50%; transition:transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); }
+        .wheel-hub { position:absolute; left:50%; top:50%; width:15%; aspect-ratio:1; transform:translate(-50%, -50%); border-radius:50%; background:#fff; border:3px solid var(--slate-200); box-shadow:0 2px 8px rgba(15,23,42,0.12); display:flex; align-items:center; justify-content:center; }
+        .wheel-hub::after { content:''; width:28%; aspect-ratio:1; border-radius:50%; background:var(--accent); }
+        .pointer { position:absolute; top:-10px; left:50%; transform:translateX(-50%); z-index:2; width:30px; height:38px; filter:drop-shadow(0 2px 3px rgba(15,23,42,0.25)); }
+        .pointer svg { display:block; width:100%; height:100%; }
+
+        .result { width:100%; max-width:420px; min-height:5.25rem; margin:1rem 0 0.75rem; text-align:center; display:flex; flex-direction:column; justify-content:center; }
+        .result-lbl { font-size:0.8125rem; font-weight:600; color:var(--slate-500); }
+        .result-naam { font-size:1.875rem; font-weight:700; color:var(--slate-800); letter-spacing:-0.02em; line-height:1.2; overflow-wrap:anywhere; }
+        .result-tekst { font-size:0.9375rem; color:var(--slate-600); }
+        .result-naam + .result-tekst { margin-top:0.25rem; font-size:0.875rem; color:var(--slate-500); }
+        .result.nieuw .result-naam { animation:op 0.5s ease-out; }
+        @keyframes op { from { transform:scale(0.92); opacity:0.4; } to { transform:none; opacity:1; } }
+
+        .btn-spin { width:100%; max-width:420px; min-height:52px; display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0 1.25rem; border-radius:12px; background:var(--accent-dark); color:#fff; font-size:1.0625rem; font-weight:600; transition:background 0.15s; }
+        .btn-spin:hover:not(:disabled) { background:var(--accent-hover); }
+        .btn-spin svg { width:20px; height:20px; flex:none; }
+        .btn-spin:disabled { background:var(--slate-200); color:var(--slate-600); cursor:default; }
+        .btn-spin[aria-disabled="true"] { cursor:progress; }
+        .hint { margin-top:0.625rem; font-size:0.8125rem; color:var(--slate-500); text-align:center; }
+        kbd { font:inherit; font-size:0.75rem; font-weight:600; padding:0 0.375rem; border:1px solid var(--slate-300); border-bottom-width:2px; border-radius:5px; background:var(--slate-50); color:var(--slate-700); }
+        @media (hover:none) and (pointer:coarse) { .hint { display:none; } }
+
+        /* Getrokken */
+        .drawn-list { list-style:none; }
+        .drawn-item { display:flex; align-items:center; gap:0.625rem; min-height:40px; padding:0.375rem 0.75rem; background:var(--accent-50); border-radius:10px; }
+        .drawn-item + .drawn-item { margin-top:0.375rem; }
+        .drawn-nr { flex:none; width:24px; height:24px; border-radius:50%; background:var(--accent-dark); color:#fff; font-size:0.75rem; font-weight:700; display:flex; align-items:center; justify-content:center; font-variant-numeric:tabular-nums; }
+        .drawn-name { min-width:0; font-size:0.9375rem; font-weight:600; color:var(--slate-800); overflow-wrap:anywhere; }
+        .drawn-item.laatste { background:#fff; box-shadow:inset 0 0 0 1.5px var(--accent); }
+        .drawn-empty { padding:1rem 0.25rem; font-size:0.875rem; color:var(--slate-500); text-align:center; }
+        .link-btn { display:inline-flex; align-items:center; gap:0.5rem; min-height:44px; margin-top:0.5rem; padding:0 0.625rem; border-radius:10px; font-size:0.875rem; font-weight:600; color:var(--accent-dark); }
+        .link-btn:hover { background:var(--accent-50); }
+        .link-btn svg { width:17px; height:17px; flex:none; }
+
+        /* Menu (⋮): zoals in de andere tools */
+        .oc-menu-wrap { position:relative; }
+        .oc-menu-wrap #menu-btn { width:44px; height:44px; min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center; border:0; border-radius:10px; background:none; color:#64748b; cursor:pointer; padding:0; }
+        .oc-menu-wrap #menu-btn:hover, .oc-menu-wrap #menu-btn[aria-expanded="true"] { background:#f1f5f9; color:#334155; }
+        .oc-menu-wrap #menu-btn svg { width:20px; height:20px; }
+        .oc-menu-wrap .menu { display:none; position:absolute; right:0; top:calc(100% + 4px); z-index:50; min-width:240px; max-width:calc(100vw - 2rem); background:#fff; border:1px solid #e2e8f0; border-radius:12px; box-shadow:0 12px 32px rgba(15,23,42,0.14); padding:0.375rem; text-align:left; }
+        .oc-menu-wrap .menu.open { display:block; }
+        .oc-menu-wrap .menu button { width:100%; min-height:44px; display:flex; align-items:center; gap:0.625rem; padding:0.5625rem 0.625rem; border:0; background:none; border-radius:8px; font:inherit; font-size:0.9375rem; text-align:left; color:#334155; white-space:nowrap; cursor:pointer; }
+        .oc-menu-wrap .menu button:hover, .oc-menu-wrap .menu button:focus-visible { background:#f1f5f9; }
+        .oc-menu-wrap .menu button svg { width:18px; height:18px; color:#64748b; flex-shrink:0; }
+        .oc-menu-wrap .menu .sep { height:1px; background:#f1f5f9; margin:0.25rem 0.375rem; }
+        .oc-menu-wrap .menu .danger, .oc-menu-wrap .menu .danger svg { color:#dc2626; }
+        .oc-menu-wrap .menu .danger:hover, .oc-menu-wrap .menu .danger:focus-visible { background:#fef2f2; }
+        .menu [data-bestand="bewaar"] { align-items:flex-start; }
+        .menu [data-bestand="bewaar"] svg { margin-top:0.1875rem; }
+        .menu .ocb-t { display:flex; flex-direction:column; min-width:0; white-space:normal; line-height:1.35; }
+        .menu .ocb-t small { font-size:0.8125rem; color:#64748b; margin-top:0.125rem; }
+
+        /* Voorbeeld */
+        .vb-bar { display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem 0.75rem; margin:-0.25rem 0 1rem; padding:0.5rem 0.5rem 0.5rem 0.75rem; background:#fffbeb; border:1px solid #fde68a; border-radius:12px; font-size:0.875rem; line-height:1.4; color:#78350f; }
+        .vb-bar svg { width:18px; height:18px; flex-shrink:0; color:#b45309; }
+        .vb-bar .vb-text { flex:1 1 14rem; min-width:0; display:flex; gap:0.5rem; align-items:flex-start; }
+        .vb-bar .vb-btns { display:flex; flex-wrap:wrap; gap:0.375rem; }
+        .vb-btn { min-height:44px; padding:0.375rem 0.625rem; border-radius:10px; font-size:0.875rem; font-weight:600; background:var(--wit); border:1px solid var(--slate-200); }
+        .vb-wis { color:#b91c1c; border-color:#fecaca; }
+        .vb-wis:hover { background:#fef2f2; }
+        .vb-eigen { color:var(--accent-dark); border-color:#a7f3d0; }
+        .vb-eigen:hover { background:var(--accent-50); }
+        @media (max-width:420px) { .vb-btn { font-size:0.8125rem; padding:0.375rem 0.5rem; } }
+
+        /* Opnieuw beginnen (zelfde knop in elke tool) */
+        .oc-restart-row { display:flex; justify-content:center; padding:0.5rem 0 0; }
+        .oc-restart-row[hidden] { display:none !important; }
+        .oc-restart { min-height:44px; padding:0.5rem 1rem; font:inherit; font-size:0.875rem; font-weight:500; color:#64748b; background:none; border:0; border-radius:10px; cursor:pointer; text-decoration:underline; text-decoration-color:#cbd5e1; text-underline-offset:3px; }
+        .oc-restart:hover { color:#b91c1c; background:#fef2f2; text-decoration-color:currentColor; }
+
+        /* Melding met ongedaan maken */
+        .toast { position:fixed; left:50%; bottom:calc(var(--bottom) + 1.25rem); transform:translate(-50%, calc(100% + 3rem)); visibility:hidden; z-index:60;
+          background:var(--slate-800); color:var(--wit); border-radius:12px; padding:0.625rem 0.625rem 0.625rem 1rem;
+          display:flex; align-items:center; gap:0.875rem; font-size:0.9375rem; box-shadow:0 10px 30px rgba(15,23,42,0.25);
+          transition:transform 0.25s ease, visibility 0s 0.25s; width:max-content; max-width:calc(100% - 2rem); }
+        .toast.show { transform:translate(-50%, 0); visibility:visible; transition:transform 0.25s ease; }
+        .toast button { color:#6ee7b7; font-weight:600; padding:0.25rem 0.5rem; border-radius:6px; min-height:44px; flex-shrink:0; white-space:nowrap; }
+        .toast button:hover { background:rgba(255,255,255,0.08); }
+        #toast-text { min-width:0; }
+
+        footer.oc-footer { text-align:center; padding:2rem 1.5rem calc(var(--bottom) + 2rem); border-top:1px solid #e2e8f0; background:#fff; }
+        footer.oc-footer .oc-quote { font-size:0.8125rem; line-height:1.5; color:#047857; margin:0; }
+
+        /* Toegankelijkheid en soepel op gsm */
+        :focus-visible { outline:2px solid #047857 !important; outline-offset:2px; }
+        .ocw-row .ocw-yes { background:#dc2626; } .ocw-row .ocw-yes:hover { background:#b91c1c; }
+        .ocw-row button { min-height:44px; }
+        html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+        button, a, summary, label, [role="button"] { touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+        @media (hover:none) { button:not(:disabled):active, a:active, summary:active { filter:brightness(0.93); } }
+        @media (pointer:coarse) { .input-field { font-size:16px; } }
+        html:has(.ocs-back, .ocw-back) { overflow:hidden; }
+        .ocs-back *, .ocw-back * { overscroll-behavior:contain; }
+        @media (prefers-reduced-motion: reduce) { * { transition:none !important; animation:none !important; } }
+        @media (forced-colors: active) { .name-dot, .drawn-nr { forced-color-adjust:none; } }
+
+/* Hoe werkt dit? Zonder JavaScript een gewone uitklapper; het gedeelde blok hieronder maakt er een kaart van. */
+.explain { margin-top:1.5rem; background:#ffffff; border:1px solid #e2e8f0; border-radius:16px; }
+.explain summary { min-height:44px; padding:0.875rem 1.125rem; font-weight:600; color:#334155; cursor:pointer; }
+.explain .inner { padding:0 1.125rem 1.125rem; font-size:0.9375rem; line-height:1.55; color:#475569; }
+.explain .inner > * + * { margin-top:0.5rem; }
+.explain .inner ul { padding-left:1.25rem; }
+/* oc-uitleg v1 begin */
+/* "Hoe werkt dit?": één blok voor alle tools. Zonder JavaScript blijft de gewone uitklapper leesbaar.
+   Het script zet .oc-u op <details class="explain"> en bouwt de inhoud om tot inleiding, stappen, tip en verwijzingen. */
+details.explain { scroll-margin-top:1rem; }
+details.explain.oc-u { --u-groen:#10b981; --u-donker:#047857; --u-licht:#a7f3d0; --u-zacht:#ecfdf5;
+  background:#ffffff; border:1px solid #e2e8f0; border-radius:18px; box-shadow:0 1px 2px rgba(15,23,42,0.04); transition:border-color 0.2s, box-shadow 0.2s; }
+details.explain.oc-u:hover, details.explain.oc-u[open] { border-color:#cbd5e1; }
+details.explain.oc-u[open] { box-shadow:0 1px 2px rgba(15,23,42,0.04), 0 12px 32px -18px rgba(15,23,42,0.18); }
+
+/* ingeklapt: een uitnodigende kaart */
+details.explain.oc-u > summary { display:flex; align-items:center; gap:0.875rem; min-height:76px; padding:0.875rem 1rem 0.875rem 0.875rem; border-radius:17px; cursor:pointer; list-style:none; color:#1e293b; font-weight:400; outline:none; -webkit-tap-highlight-color:transparent; }
+details.explain.oc-u > summary::-webkit-details-marker { display:none; }
+details.explain.oc-u > summary::after, details.explain.oc-u > summary::before { content:none; }
+details.explain.oc-u > summary svg { transform:none; margin:0; }
+details.explain.oc-u > summary:focus-visible { box-shadow:0 0 0 2px #ffffff, 0 0 0 4px var(--u-groen); }
+details.explain.oc-u[open] > summary { border-bottom-left-radius:0; border-bottom-right-radius:0; }
+details.explain.oc-u .oc-u-ico { flex-shrink:0; width:48px; height:48px; border-radius:14px; background:var(--u-zacht); display:flex; align-items:center; justify-content:center; transition:background-color 0.2s; }
+details.explain.oc-u .oc-u-ico svg { width:28px; height:28px; display:block; }
+details.explain.oc-u .oc-u-kop { flex:1; min-width:0; display:flex; flex-direction:column; gap:0.125rem; }
+details.explain.oc-u .oc-u-titel { font-size:1.0625rem; font-weight:700; color:#1e293b; letter-spacing:-0.01em; line-height:1.3; }
+details.explain.oc-u .oc-u-meta { font-size:0.8125rem; color:#64748b; line-height:1.35; font-variant-numeric:tabular-nums; }
+details.explain.oc-u .oc-u-pijl { flex-shrink:0; width:40px; height:40px; border-radius:50%; background:#f1f5f9; color:#475569; display:flex; align-items:center; justify-content:center; transition:background-color 0.2s, color 0.2s, transform 0.35s cubic-bezier(0.2,0.7,0.2,1); }
+details.explain.oc-u .oc-u-pijl svg { width:20px; height:20px; }
+details.explain.oc-u > summary:hover .oc-u-pijl { background:var(--u-zacht); color:var(--u-donker); }
+details.explain.oc-u[open] .oc-u-pijl { transform:rotate(180deg); background:var(--u-zacht); color:var(--u-donker); }
+
+/* op brede schermen: de stappen als kleine route, die plaats maakt voor de echte stappen bij openen */
+details.explain.oc-u .oc-u-route { display:none; align-items:center; flex-shrink:0; margin-right:0.75rem; transition:opacity 0.25s, visibility 0.25s; }
+details.explain.oc-u .oc-u-route i { position:relative; display:flex; align-items:center; justify-content:center; width:26px; height:26px; margin-left:16px; border-radius:50%; border:1.5px solid var(--u-licht); background:#ffffff; color:var(--u-donker); font-style:normal; font-size:0.75rem; font-weight:700; line-height:1; font-variant-numeric:tabular-nums; transition:border-color 0.2s, background-color 0.2s; }
+details.explain.oc-u .oc-u-route i:first-child { margin-left:0; }
+details.explain.oc-u .oc-u-route i + i::before { content:''; position:absolute; right:calc(100% + 1.5px); top:calc(50% - 0.75px); width:16px; height:1.5px; background:var(--u-licht); }
+details.explain.oc-u > summary:hover .oc-u-route i { border-color:var(--u-groen); }
+details.explain.oc-u[open] .oc-u-route { opacity:0; visibility:hidden; }
+@media (min-width:700px) { details.explain.oc-u .oc-u-route { display:flex; } }
+
+/* uitgeklapt */
+details.explain.oc-u > .inner { padding:0; margin:0; border:0; border-radius:0; background:none; font-size:0.9375rem; color:#475569; container-type:inline-size; }
+details.explain.oc-u > .inner p, details.explain.oc-u > .inner ul, details.explain.oc-u > .inner ol, details.explain.oc-u > .inner li { margin:0; }
+details.explain.oc-u .oc-u-raam { border-top:1px solid #f1f5f9; margin:0 1.25rem; padding:1.25rem 0 1.5rem; display:grid; gap:1.375rem; }
+details.explain.oc-u .oc-u-lees, details.explain.oc-u .oc-u-doe { display:flex; flex-direction:column; gap:1.125rem; min-width:0; }
+details.explain.oc-u .oc-u-intro { font-size:1.0625rem; line-height:1.55; color:#334155; letter-spacing:-0.005em; margin:0; max-width:40em; text-wrap:pretty; }
+details.explain.oc-u .oc-u-noot { margin:0; line-height:1.6; max-width:42em; text-wrap:pretty; }
+details.explain.oc-u .oc-u-noot b { color:#1e293b; }
+
+/* stappen: genummerde tijdlijn */
+details.explain.oc-u ol.oc-u-stappen { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+details.explain.oc-u .oc-u-stap { position:relative; display:grid; grid-template-columns:2.25rem minmax(0,1fr); column-gap:0.875rem; padding-bottom:1.125rem; }
+details.explain.oc-u .oc-u-stap:last-child { padding-bottom:0; }
+details.explain.oc-u .oc-u-stap::before { content:''; position:absolute; left:calc(1.125rem - 1px); top:2.5rem; bottom:0.25rem; width:2px; border-radius:2px; background:var(--u-licht); transform-origin:top; }
+details.explain.oc-u .oc-u-stap:last-child::before { content:none; }
+details.explain.oc-u .oc-u-nr { width:2.25rem; height:2.25rem; border-radius:50%; background:#ffffff; border:2px solid var(--u-groen); color:var(--u-donker); font-size:0.9375rem; font-weight:700; display:flex; align-items:center; justify-content:center; font-variant-numeric:tabular-nums; line-height:1; }
+details.explain.oc-u .oc-u-stap-tekst { padding-top:0.3125rem; min-width:0; }
+details.explain.oc-u .oc-u-stap-titel { display:block; font-size:1rem; font-weight:700; color:#1e293b; line-height:1.35; letter-spacing:-0.005em; }
+details.explain.oc-u .oc-u-stap-uitleg { display:block; margin-top:0.25rem; line-height:1.55; color:#475569; text-wrap:pretty; }
+details.explain.oc-u .oc-u-stap-uitleg b { color:#1e293b; }
+
+details.explain.oc-u .oc-u-stap-uitleg.oc-u-enkel { margin-top:0; color:#334155; }
+details.explain.oc-u .oc-u-doe > ul:not([class]), details.explain.oc-u .oc-u-doe > ol:not([class]) { padding-left:1.25rem; display:grid; gap:0.375rem; line-height:1.55; }
+details.explain.oc-u .oc-u-doe > ul:not([class]) > li::marker { color:var(--u-groen); }
+
+/* begrippen: dezelfde opbouw zonder nummers, voor lijsten die geen volgorde zijn */
+details.explain.oc-u ul.oc-u-begrippen { list-style:none; margin:0; padding:0; display:grid; gap:0.875rem; }
+details.explain.oc-u .oc-u-begrip { display:grid; grid-template-columns:0.5rem minmax(0,1fr); column-gap:0.875rem; }
+details.explain.oc-u .oc-u-begrip::before { content:''; width:0.5rem; height:0.5rem; border-radius:50%; background:var(--u-groen); margin-top:0.5rem; }
+
+/* tip */
+details.explain.oc-u .oc-u-tip { display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:0.75rem; align-items:start; background:#f8fafc; border:1px solid #e2e8f0; border-radius:14px; padding:0.875rem 1rem; }
+details.explain.oc-u .oc-u-tip svg { width:22px; height:22px; color:var(--u-donker); margin-top:0.0625rem; }
+details.explain.oc-u .oc-u-tip-titel { display:block; font-weight:700; color:#1e293b; font-size:0.9375rem; line-height:1.4; }
+details.explain.oc-u .oc-u-tip-tekst { display:block; line-height:1.55; color:#475569; margin-top:0.125rem; }
+details.explain.oc-u kbd { display:inline-block; font:inherit; font-size:0.8125rem; font-weight:600; line-height:1.35; color:#334155; background:#ffffff; border:1px solid #cbd5e1; border-bottom-width:2px; border-radius:6px; padding:0 0.4375rem; margin:0 0.0625rem; vertical-align:0.0625rem; white-space:nowrap; }
+
+/* stil: alles blijft op dit toestel */
+details.explain.oc-u .oc-u-stil { display:flex; gap:0.5rem; align-items:flex-start; font-size:0.875rem; color:#64748b; line-height:1.5; margin:0; }
+details.explain.oc-u .oc-u-stil svg { flex-shrink:0; width:18px; height:18px; margin-top:0.0625rem; color:#64748b; }
+
+/* verwijzingen naar andere tools */
+details.explain.oc-u .oc-u-samen { display:flex; flex-direction:column; gap:0.5rem; }
+details.explain.oc-u .oc-u-samen-titel { font-size:0.875rem; font-weight:600; color:#475569; }
+details.explain.oc-u .oc-u-chips { display:flex; flex-wrap:wrap; gap:0.5rem; }
+details.explain.oc-u a.oc-u-chip { display:inline-flex; align-items:center; gap:0.5rem; min-height:44px; margin:0; padding:0 0.875rem 0 0.5rem; border:1px solid var(--u-licht); border-radius:999px; background:#ffffff; color:var(--u-donker); font-size:0.9375rem; font-weight:600; text-decoration:none; line-height:1.2; transition:background-color 0.2s, border-color 0.2s; }
+details.explain.oc-u .oc-u-chip-ico { width:28px; height:28px; border-radius:50%; background:var(--u-zacht); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+details.explain.oc-u .oc-u-chip-ico svg { width:15px; height:15px; }
+details.explain.oc-u a.oc-u-chip:hover { background:var(--u-zacht); border-color:var(--u-groen); }
+details.explain.oc-u a.oc-u-chip:focus-visible { outline:2px solid var(--u-groen); outline-offset:2px; }
+details.explain.oc-u .oc-u-noot a, details.explain.oc-u .oc-u-stap-uitleg a, details.explain.oc-u .oc-u-tip-tekst a { color:var(--u-donker); font-weight:600; text-decoration:underline; text-decoration-color:var(--u-licht); text-decoration-thickness:2px; text-underline-offset:3px; }
+details.explain.oc-u .oc-u-noot a:hover { text-decoration-color:var(--u-donker); }
+
+/* breed: links lezen, rechts doen */
+@container (min-width:720px) and (max-width:999.98px) {
+  details.explain.oc-u .oc-u-raam.oc-u-lang { grid-template-columns:minmax(0,1fr); grid-template-rows:none; }
+  details.explain.oc-u .oc-u-lang .oc-u-lees, details.explain.oc-u .oc-u-lang .oc-u-doe, details.explain.oc-u .oc-u-lang .oc-u-samen { grid-column:1; grid-row:auto; }
+}
+@container (min-width:720px) {
+  details.explain.oc-u .oc-u-raam { grid-template-columns:minmax(0,5fr) minmax(0,7fr); grid-template-rows:auto 1fr; column-gap:3rem; row-gap:1.75rem; align-items:start; padding:1.75rem 0.5rem 2rem; }
+  details.explain.oc-u .oc-u-lees { grid-column:1; grid-row:1; }
+  details.explain.oc-u .oc-u-doe { grid-column:2; grid-row:1 / span 2; }
+  details.explain.oc-u .oc-u-samen { grid-column:1; grid-row:2; }
+  details.explain.oc-u .oc-u-zonder-intro { grid-template-columns:minmax(0,1fr); }
+  details.explain.oc-u .oc-u-zonder-intro .oc-u-doe, details.explain.oc-u .oc-u-zonder-intro .oc-u-samen { grid-column:1; grid-row:auto; }
+  details.explain.oc-u .oc-u-intro { font-size:1.25rem; line-height:1.5; }
+}
+@media (min-width:760px) { details.explain.oc-u .oc-u-raam { margin:0 1.5rem; } details.explain.oc-u > summary { padding:1rem 1.25rem 1rem 1rem; } }
+
+/* beweging enkel als antwoord op openen */
+@media (prefers-reduced-motion:reduce) {
+  details.explain.oc-u, details.explain.oc-u .oc-u-pijl, details.explain.oc-u .oc-u-ico, details.explain.oc-u .oc-u-route, details.explain.oc-u .oc-u-route i, details.explain.oc-u a.oc-u-chip { transition:none; }
+}
+@media print { details.explain { display:none; } }
+/* oc-uitleg v1 einde */
+</style>
 </head>
 <body>
     <header class="header oc-head">
-        <a href="https://onderconstructie.github.io/projectmanagement/" class="back-link" aria-label="Terug naar Projectmanagement">
+        <a href="https://onderconstructie.github.io/projectmanagement/#vergaderen" class="back-link" aria-label="Terug naar Vergaderen">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Projectmanagement
+            Vergaderen
         </a>
         <div class="logo" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/><path d="M20 22L14.50 12.47A11 11 0 0 1 25.50 12.47Z" fill="#10b981"/><path d="M20 22L25.50 12.47A11 11 0 0 1 31.00 22.00Z" fill="#e2e8f0"/><path d="M20 22L31.00 22.00A11 11 0 0 1 25.50 31.53Z" fill="#cbd5e1"/><path d="M20 22L25.50 31.53A11 11 0 0 1 14.50 31.53Z" fill="#e2e8f0"/><path d="M20 22L14.50 31.53A11 11 0 0 1 9.00 22.00Z" fill="#cbd5e1"/><path d="M20 22L9.00 22.00A11 11 0 0 1 14.50 12.47Z" fill="#e2e8f0"/><circle cx="20" cy="22" r="11" stroke="#94a3b8" stroke-width="1.5"/><circle cx="20" cy="22" r="2.2" fill="#fff" stroke="#94a3b8" stroke-width="1.2"/><path d="M16.5 6.5h7L20 12z" fill="#047857" stroke="#047857" stroke-width="1" stroke-linejoin="round"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/><path d="M20 22L14.50 12.47A11 11 0 0 1 25.50 12.47Z" fill="#10b981"/><path d="M20 22L25.50 12.47A11 11 0 0 1 31.00 22.00Z" fill="#e2e8f0"/><path d="M20 22L31.00 22.00A11 11 0 0 1 25.50 31.53Z" fill="#cbd5e1"/><path d="M20 22L25.50 31.53A11 11 0 0 1 14.50 31.53Z" fill="#e2e8f0"/><path d="M20 22L14.50 31.53A11 11 0 0 1 9.00 22.00Z" fill="#cbd5e1"/><path d="M20 22L9.00 22.00A11 11 0 0 1 14.50 12.47Z" fill="#e2e8f0"/><circle cx="20" cy="22" r="11" stroke="#94a3b8" stroke-width="1.5"/><circle cx="20" cy="22" r="2.2" fill="#fff" stroke="#94a3b8" stroke-width="1.2"/><path d="M16.5 6.5h7L20 12z" fill="#047857" stroke="#047857" stroke-width="1" stroke-linejoin="round"/></svg>
         </div>
         <h1 class="title">Nomen Fortuna</h1>
         <p class="subtitle">Wie begint? Trek een naam</p>
     </header>
 
     <main class="main">
+        <div class="vb-bar" id="vb-bar" role="note" hidden>
+            <span class="vb-text"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>Dit is een voorbeeld om de tool te verkennen. Het telt niet mee in andere tools.</span></span>
+            <span class="vb-btns"><button type="button" class="vb-btn vb-wis" id="vb-wis">Wis voorbeeld</button><button type="button" class="vb-btn vb-eigen" id="vb-eigen">Maak er mijn eigen van</button></span>
+        </div>
+
         <div class="main-grid">
-            <!-- Names Input -->
-            <div class="card">
-                <p class="card-title">Deelnemers</p>
-                
-                <div class="input-group">
-                    <input type="text" class="input-field" id="nameInput" placeholder="Namen, met komma's" autocomplete="off" aria-label="Namen toevoegen, gescheiden door komma's">
-                    <button class="btn btn-primary btn-icon" id="addBtn" type="button" title="Toevoegen" aria-label="Namen toevoegen">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <path d="M12 5v14M5 12h14"/>
-                        </svg>
-                    </button>
-                </div>
-
-                <button class="oc-import" id="importBtn" type="button" hidden>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
-                    Overnemen uit…
-                </button>
-
-                <div class="names-list" id="namesList"></div>
-                
-                <p class="names-count"><span id="namesCount">0</span> deelnemers</p>
-
-                <div class="action-row">
-                    <button class="btn btn-secondary" id="resetBtn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                            <path d="M3 3v5h5"/>
-                        </svg>
-                        Herstel
-                    </button>
-                    <button class="btn btn-danger" id="clearBtn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
-                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                        </svg>
-                        Wis
-                    </button>
-                </div>
-            </div>
-
-            <!-- Wheel -->
-            <div class="wheel-section">
-                <div class="wheel-container">
-                    <div class="pointer">
-                        <svg viewBox="0 0 32 40" fill="currentColor">
-                            <path d="M16 40 L4 12 Q4 0 16 0 Q28 0 28 12 Z"/>
-                        </svg>
-                    </div>
-                    <div class="wheel-outer">
-                        <div class="wheel-inner">
-                            <canvas id="wheel" width="800" height="800"></canvas>
+            <section class="card names-card" aria-labelledby="names-title">
+                <div class="card-head">
+                    <h2 class="card-title" id="names-title">Deelnemers</h2>
+                    <div class="menu-wrap oc-menu-wrap">
+                        <button class="icon-btn" id="menu-btn" type="button" aria-label="Meer acties" aria-haspopup="true" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></button>
+                        <div class="menu" id="menu" role="menu" aria-label="Meer acties">
+                            <button type="button" data-bestand="bewaar" role="menuitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 11v6M9 14l3 3 3-3"/></svg><span class="ocb-t">Bewaar als bestand<small>Om later verder te werken, of door te geven</small></span></button>
+                            <button type="button" data-bestand="open" role="menuitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 16v-5M9.5 13.5 12 11l2.5 2.5"/></svg>Open bestand</button>
+                            <div class="sep" role="separator"></div>
+                            <button type="button" data-act="wipe" class="danger" role="menuitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg>Alles wissen</button>
                         </div>
                     </div>
-                    <div class="wheel-center">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                    </div>
                 </div>
 
-                <button class="btn btn-primary btn-spin" id="spinBtn" disabled>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-                        <polyline points="21 3 21 9 15 9"/>
-                    </svg>
-                    Draai het rad
-                </button>
-            </div>
+                <form class="input-group" id="add-form" autocomplete="off">
+                    <input type="text" class="input-field" id="name-in" placeholder="Bv. Ann, Bram, Chloé" maxlength="600" enterkeyhint="done" autocapitalize="words" spellcheck="false" aria-label="Naam toevoegen. Meerdere namen kan met een komma ertussen.">
+                    <button class="add-btn" type="submit" aria-label="Toevoegen" title="Toevoegen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+                </form>
+                <div class="import-row"><button type="button" class="oc-import" id="import-btn" data-oc-types="betrokkene" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11M7.5 9.5L12 14l4.5-4.5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>Overnemen uit…</button></div>
 
-            <!-- Results -->
-            <div class="card">
-                <p class="card-title">Getrokken</p>
-                <div class="drawn-list" id="drawnList">
-                    <div class="empty-state">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                        <p>Nog niemand getrokken</p>
-                    </div>
+                <div id="names"></div>
+            </section>
+
+            <section class="wheel-section" aria-label="Rad">
+                <div class="wheel">
+                    <div class="pointer" aria-hidden="true"><svg viewBox="0 0 30 38"><path d="M15 37L3.5 11.5C1.6 5.6 6.8 1 15 1s13.4 4.6 11.5 10.5Z" fill="#047857" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div>
+                    <div class="wheel-ring"><canvas id="wheel" role="img" aria-label="Rad zonder namen"></canvas></div>
+                    <div class="wheel-hub" aria-hidden="true"></div>
                 </div>
-            </div>
+                <div class="result" id="result" role="status" aria-live="polite" aria-atomic="true"></div>
+                <button class="btn-spin" id="spin-btn" type="button" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.22-8.56"/><path d="M21 3v6h-6"/></svg><span>Draai het rad</span></button>
+                <p class="hint" id="hint">Tip: druk op <kbd>Spatie</kbd> om het rad te draaien.</p>
+            </section>
+
+            <section class="card drawn-card" aria-labelledby="drawn-title">
+                <div class="card-head card-head-plain"><h2 class="card-title" id="drawn-title">Getrokken</h2></div>
+                <div id="drawn"></div>
+                <button type="button" class="link-btn" id="round-btn" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Nieuwe ronde</button>
+            </section>
         </div>
+        <div class="oc-restart-row" id="oc-restart-row" hidden><button type="button" class="oc-restart" id="oc-restart-btn">Opnieuw beginnen</button></div>
+
+        <details class="explain">
+            <summary>Hoe werkt dit?</summary>
+            <div class="inner">
+                <p>Nomen Fortuna trekt een naam uit een groep. Zo beslist het toeval wie begint, of in welke volgorde iedereen aan de beurt komt.</p>
+                <ul>
+                    <li><b>Zet de namen erin.</b> Typ een naam en druk op Enter. Meer namen tegelijk kan ook, met een komma ertussen. Met "Overnemen uit andere tools" haal je namen uit bijvoorbeeld de Betrokkenenradar of de Sociale Mixer.</li>
+                    <li><b>Draai het rad.</b> Het rad stopt bij één naam. Die persoon is aan de beurt en komt in de lijst Getrokken.</li>
+                    <li><b>Draai opnieuw voor de volgende.</b> Wie getrokken is, gaat uit het rad. Zo komt niemand twee keer aan de beurt.</li>
+                    <li><b>Begin een nieuwe ronde.</b> Kies Nieuwe ronde (vroeger heette die knop Herstel). Alle namen gaan dan terug in het rad en de lijst Getrokken is weer leeg. De namen zelf blijven staan.</li>
+                </ul>
+                <p>Tip: druk op Spatie om het rad te draaien. Wil je iemand niet meer in het rad? Kies het kruisje naast de naam.</p>
+                <p>Alles blijft op dit toestel. Kom je later terug, dan staan je namen er nog.</p>
+                <p>Wil je groepjes maken met dezelfde namen? Gebruik de <a href="../mixer/">Sociale Mixer</a>. Wil je iedereen even lang aan het woord laten? Gebruik <a href="../check-in/">Check-in</a>. Namen uit de <a href="../stakeholders/">Betrokkenenradar</a> neem je hier over.</p>
+            </div>
+        </details>
     </main>
 
     <footer class="footer oc-footer">
         <p class="quote oc-quote">Het rad beslist, wij beginnen.</p>
     </footer>
 
-    <!-- Winner Modal -->
-    <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="winnerName">
-        <div class="modal">
-            <div class="modal-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                </svg>
-            </div>
-            <p class="modal-title">Het lot heeft gekozen</p>
-            <p class="modal-name" id="winnerName">-</p>
-            <button class="btn btn-primary" id="closeModal">Doorgaan</button>
-        </div>
-    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-text"></span><button type="button" id="toast-btn" hidden>Ongedaan</button></div>
 
-    <script>
+<script>
+/* Het actieve project uit de app (oc.project): nieuwe projecten, analyses en lijsten krijgen die naam. */
+function ocProject(fb) { try { const p = JSON.parse(localStorage.getItem('oc.project')); return p && typeof p.name === 'string' && p.name.trim() ? p.name.trim().slice(0, 80) : fb; } catch { return fb; } }
+function ocPickProject(st, arr, cur = 'current') { const p = ocProject(''); if (!p || !st || !Array.isArray(st[arr])) return; const u = st[arr].find(x => x && x.name === p); if (u) st[cur] = u.id; }   // open het actieve project uit de app
 /* ---------- Overnemen tussen tools (gedeeld door de Onder Constructie-tools, v2) ----------
    Alle tools draaien op hetzelfde domein en delen dus localStorage. Elke tool legt wat hij te bieden
    heeft klaar onder 'oc.share.<tool-id>', in een vaste vorm, zodat andere tools het kunnen overnemen
@@ -767,6 +417,10 @@
      'taak'        iets dat gedaan moet worden                     { text, note? }
      'actie'       taak met eigenaar en/of termijn                 { text, who?, when? }
      'risico'      risico met kans en impact                       { text, note? }
+     'besluit'     beslissing (Beslissingslog)                     { text, note?, who?, when? }
+     'doel'        wat er beter moet worden (Projectopdracht)      { text, note? }
+                   Andere tools kiezen zelf welke soorten ze tonen (types in pick/count/sources) en slaan onbekende soorten dus over.
+   'when' is bij voorkeur een datum als JJJJ-MM-DD; in "Overnemen uit…" staat die als 15 februari 2027.
 
    Gebruik:
      ocShare.publish('raci', 'RACI-matrix', [
@@ -778,8 +432,11 @@
 */
 const ocShare = (() => {
   const PREFIX = 'oc.share.';
-  const LABEL = { betrokkene:'betrokkenen', taak:'taken', actie:'acties', risico:"risico's" };
+  const LABEL = { betrokkene:'betrokkenen', taak:'taken', actie:'acties', risico:"risico's", besluit:'besluiten', doel:'doelen' };
   const esc = v => String(v == null ? '' : v).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+  // Een datum als JJJJ-MM-DD tonen we zoals in de tools: 15 februari 2027. Andere tekst blijft zoals ze is.
+  const datum = v => { const s = String(v || '').trim(), d = /^\d{4}-\d{2}-\d{2}$/.test(s) ? new Date(s + 'T12:00:00') : null;
+    return d && !isNaN(d) ? d.toLocaleDateString('nl-BE', { day:'numeric', month:'long', year:'numeric' }) : s; };
 
   function publish(id, tool, lists) {
     try {
@@ -865,7 +522,7 @@ const ocShare = (() => {
           <div class="ocs-src"><div class="ocs-src-head"><b>${esc(s.tool)}</b><span>${esc(s.list)} · ${s.items.length}</span>
             <button class="ocs-all" type="button" data-all="${si}">alles</button></div>
             ${s.items.map((it, ii) => `<label class="ocs-item"><input type="checkbox" data-s="${si}" data-i="${ii}">
-              <span>${esc(it.text)}${it.who || it.when || it.note ? `<small>${esc([it.who, it.when, it.note].filter(Boolean).join(' · '))}</small>` : ''}</span></label>`).join('')}
+              <span>${esc(it.text)}${it.who || it.when || it.note ? `<small>${esc([it.who, datum(it.when), it.note].filter(Boolean).join(' · '))}</small>` : ''}</span></label>`).join('')}
           </div>`).join('') : `<p class="ocs-empty">Er zijn nog geen ${esc(what)} om over te nemen. Vul ze eerst in een andere tool van Onder Constructie in, dan verschijnen ze hier.</p>`}
         </div>
         <div class="ocs-foot"><button class="ocs-btn ocs-cancel" type="button">Annuleer</button>
@@ -875,6 +532,9 @@ const ocShare = (() => {
       const ok = back.querySelector('.ocs-ok');
       const boxes = () => [...back.querySelectorAll('input[type=checkbox]')];
       const sync = () => { const n = boxes().filter(b => b.checked).length; ok.disabled = !n; ok.textContent = n ? `Neem ${n} over` : 'Neem over'; };
+      // Eén bron, of geopend vanuit een tool (?van=<tool>): die items staan al aangevinkt.
+      let van = window.ocVan || ''; try { van = van || new URLSearchParams(location.search).get('van') || ''; } catch {}
+      boxes().forEach(b => { const s = src[+b.dataset.s]; if (src.length === 1 || (van && s.id === van)) b.checked = true; }); sync();
       back.addEventListener('change', sync);
       back.addEventListener('click', e => {
         const a = e.target.closest('[data-all]');
@@ -896,358 +556,914 @@ const ocShare = (() => {
   const count = (types, self) => sources(types, self).reduce((n, s) => n + s.items.length, 0);
   return { publish, clear, pick, count, sources, esc };
 })();
-        let ocToastTimer = null;
-        function ocToast(msg) {
-            const t = document.getElementById('ocToast');
-            t.textContent = msg; t.classList.add('show');
-            clearTimeout(ocToastTimer); ocToastTimer = setTimeout(() => t.classList.remove('show'), 2600);
-        }
-        // State
-        let names = [];
-        let originalNames = [];
-        let drawnNames = [];
-        let currentRotation = 0;
-        let isSpinning = false;
 
-        // Kleuren (afgestemd op nieuwe stijl)
-        const colors = [
-            '#10b981', '#0ea5e9', '#8b5cf6', '#f59e0b', 
-            '#ef4444', '#ec4899', '#14b8a6', '#6366f1'
-        ];
+/* ---------- Bevestigen, ongedaan maken en melding ---------- */
+let ocSaves = 0;
+// Bevestiging in de pagina (geen pop-up van de browser).
+// Stijl van de bevestiging en de knoppen 'Overnemen uit…': meteen laden.
+function ocStyle() {
+  if (!document.getElementById('ocw-style')) {
+    const s = document.createElement('style'); s.id = 'ocw-style';
+    s.textContent = `.ocw-back{position:fixed;inset:0;z-index:10001;display:flex;align-items:center;justify-content:center;padding:1rem;background:rgba(15,23,42,.45);backdrop-filter:blur(3px);font-family:'DM Sans',system-ui,sans-serif}
+      .ocw{width:100%;max-width:400px;background:#fff;border-radius:16px;padding:1.375rem 1.375rem 1.125rem;box-shadow:0 20px 50px rgba(15,23,42,.25);color:#1e293b}
+      .ocw b{display:block;font-size:1.0625rem;letter-spacing:-.01em;margin-bottom:.375rem}
+      .ocw p{font-size:.9375rem;line-height:1.5;color:#475569}
+      .ocw-row{display:flex;justify-content:flex-end;gap:.5rem;margin-top:1.25rem}
+      .ocw-row button{font:inherit;font-size:.9375rem;font-weight:600;padding:.625rem 1rem;min-height:44px;border-radius:10px;border:0;cursor:pointer}
+      .ocw-no{background:#f1f5f9;color:#475569} .ocw-yes{background:#dc2626;color:#fff} .ocw-yes:hover{background:#b91c1c}
+      .oc-import{display:inline-flex;align-items:center;gap:.375rem;font:inherit;font-size:.8125rem;font-weight:600;color:#059669;background:#fff;border:1px dashed #a7f3d0;border-radius:999px;padding:.3125rem .75rem;cursor:pointer;white-space:nowrap}
+      .oc-import:hover{background:#ecfdf5;border-color:#10b981} .oc-import svg{width:15px;height:15px} .oc-import[hidden]{display:none}`;
+    document.head.appendChild(s);
+  }
+}
+ocStyle();
+function ocConfirm(title, text, okText) {
+  return new Promise(resolve => {
+    const back = document.createElement('div'); back.className = 'ocw-back';
+    back.innerHTML = '<div class="ocw" role="alertdialog" aria-modal="true"><b></b><p></p><div class="ocw-row"><button class="ocw-no" type="button">Annuleer</button><button class="ocw-yes" type="button"></button></div></div>';
+    back.querySelector('b').textContent = title; back.querySelector('p').textContent = text; back.querySelector('.ocw-yes').textContent = okText;
+    document.body.appendChild(back);
+    const done = v => { document.removeEventListener('keydown', key, true); back.remove(); resolve(v); };
+    const key = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); done(false); } };
+    document.addEventListener('keydown', key, true);
+    back.querySelector('.ocw-no').onclick = () => done(false);
+    back.querySelector('.ocw-yes').onclick = () => done(true);
+    back.addEventListener('click', e => { if (e.target === back) done(false); });
+    back.querySelector('.ocw-no').focus();
+  });
+}
+// Ongedaan maken van een wisbeurt kan alleen zolang er sindsdien niets anders bewaard werd.
+function ocUndoable(restore) {
+  const mark = ocSaves;
+  return () => {
+    if (ocSaves !== mark) { setTimeout(() => toast('Ongedaan maken kan niet meer: er is intussen iets veranderd'), 60); return; }
+    restore();
+  };
+}
+const $ = id => document.getElementById(id);
+let undoFn = null, toastTimer = null;
+function toast(msg, undo) {
+  undoFn = undo || null;
+  $('toast-text').textContent = msg;
+  $('toast-btn').hidden = !undo;
+  $('toast').classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { $('toast').classList.remove('show'); undoFn = null; }, undo ? 6000 : 2600);
+}
+$('toast-btn').addEventListener('click', () => {
+  if (undoFn) { undoFn(); undoFn = null; save(); render(); }
+  $('toast').classList.remove('show');
+});
 
-        // Elements
-        const canvas = document.getElementById('wheel');
-        const ctx = canvas.getContext('2d');
-        const nameInput = document.getElementById('nameInput');
-        const addBtn = document.getElementById('addBtn');
-        const namesList = document.getElementById('namesList');
-        const namesCount = document.getElementById('namesCount');
-        const spinBtn = document.getElementById('spinBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const drawnList = document.getElementById('drawnList');
-        const modal = document.getElementById('modal');
-        const winnerName = document.getElementById('winnerName');
-        const closeModal = document.getElementById('closeModal');
+/* ---------- Opslag: fortuna.v1 = { all: alle namen, drawn: getrokken in volgorde, voorbeeld? } ---------- */
+const KEY = 'fortuna.v1', OC_ID = 'fortuna', OC_TOOL = 'Nomen Fortuna';
+const MAX = 100, LEN = 60;
+const VOORBEELD = ['Amira', 'Bram', 'Chloé', 'Daan', 'Elif', 'Jonas', 'Lotte', 'Youssef'];
+const lc = s => String(s).trim().toLocaleLowerCase('nl');
+function schoon(a) {
+  const uit = [], gezien = new Set();
+  (Array.isArray(a) ? a : []).forEach(x => {
+    if (typeof x !== 'string') return;
+    const s = x.replace(/\s+/g, ' ').trim().slice(0, LEN);
+    if (s && !gezien.has(lc(s))) { gezien.add(lc(s)); uit.push(s); }
+  });
+  return uit;
+}
+const leeg = () => ({ all: [], drawn: [] });
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d && typeof d === 'object' && !Array.isArray(d)) {
+      // Ook een oudere of half kapotte vorm laadt: wie getrokken is, hoort altijd bij de namen.
+      const drawn = schoon(d.drawn || d.drawnNames);
+      const all = schoon([].concat(Array.isArray(d.all) ? d.all : Array.isArray(d.originalNames) ? d.originalNames : Array.isArray(d.names) ? d.names : [], drawn)).slice(0, MAX);
+      const s = { all, drawn: drawn.map(n => all.find(a => lc(a) === lc(n))).filter(Boolean) };
+      if (d.voorbeeld === true && all.length) s.voorbeeld = true;
+      return s;
+    }
+  } catch {}
+  return leeg();
+}
+let state = load();
+function save() {
+  ocSaves++;
+  try { if (state.all.length) localStorage.setItem(KEY, JSON.stringify(state)); else localStorage.removeItem(KEY); } catch {}
+  ocPublish();
+}
+// Deelnemers liggen klaar als 'betrokkene' voor andere tools. Een voorbeeld gaat nooit mee.
+function ocPublish() {
+  if (state.voorbeeld || !state.all.length) ocShare.clear(OC_ID);
+  else ocShare.publish(OC_ID, OC_TOOL, [{ name: ocProject('Deelnemers'), items: state.all.map(n => ({ type: 'betrokkene', text: n })) }]);
+}
+const snapshot = () => { const c = JSON.parse(JSON.stringify(state)); return () => { state = c; shown = null; }; };
+const pool = () => { const g = new Set(state.drawn.map(lc)); return state.all.filter(n => !g.has(lc(n))); };
 
-        // Draw wheel
-        function drawWheel() {
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = canvas.width / 2 - 20;
+/* ---------- Kleuren: alleen groen en grijs, met genoeg contrast voor de naam ---------- */
+const KLEUR = [
+  { bg: '#047857', fg: '#ffffff' }, { bg: '#e2e8f0', fg: '#1e293b' }, { bg: '#475569', fg: '#ffffff' },
+  { bg: '#a7f3d0', fg: '#064e3b' }, { bg: '#065f46', fg: '#ffffff' }, { bg: '#cbd5e1', fg: '#1e293b' }
+];
+function kleur(i, n) {
+  let k = i % KLEUR.length;
+  if (n > 1 && i === n - 1 && k === 0) k = 2;   // de laatste schijf mag niet dezelfde kleur hebben als de eerste
+  return KLEUR[k];
+}
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+/* ---------- Rad tekenen ---------- */
+const canvas = $('wheel'), ctx = canvas.getContext('2d');
+let rotation = 0, spinning = false, shown = null;   // shown: het rad zoals het stopte, met de getrokken naam erin
+const DUUR = 4000;
+const FONT = '"DM Sans", system-ui, sans-serif';
+function passend(tekst, max) {
+  if (ctx.measureText(tekst).width <= max) return tekst;
+  let t = tekst;
+  while (t.length > 1 && ctx.measureText(t + '…').width > max) t = t.slice(0, -1);
+  return t.trimEnd() + '…';
+}
+function drawWheel() {
+  const dpr = Math.min(3, window.devicePixelRatio || 1), css = canvas.offsetWidth || 300, px = Math.round(css * dpr);
+  if (canvas.width !== px) { canvas.width = px; canvas.height = px; }
+  const names = shown ? shown.names : pool(), hi = shown ? shown.hi : -1;
+  const W = canvas.width, c = W / 2, r = c - 1;
+  ctx.clearRect(0, 0, W, W);
+  if (!names.length) {
+    ctx.beginPath(); ctx.arc(c, c, r, 0, 2 * Math.PI); ctx.fillStyle = '#f8fafc'; ctx.fill();
+    ctx.setLineDash([6 * dpr, 6 * dpr]); ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1.5 * dpr;
+    ctx.beginPath(); ctx.arc(c, c, r * 0.62, 0, 2 * Math.PI); ctx.stroke(); ctx.setLineDash([]);
+    return;
+  }
+  const n = names.length, step = 2 * Math.PI / n, hub = W * 0.085;
+  const arc = (2 * Math.PI * r * 0.62 / n) / dpr;                        // breedte van een schijf halverwege, in css-pixels
+  const fs = Math.max(12, Math.min(17, arc * 0.55, css / 18));
+  names.forEach((nm, i) => {
+    const k = kleur(i, n), a0 = i * step;
+    ctx.globalAlpha = hi >= 0 && i !== hi ? 0.28 : 1;
+    ctx.beginPath(); ctx.moveTo(c, c); ctx.arc(c, c, r, a0, a0 + step); ctx.closePath();
+    ctx.fillStyle = k.bg; ctx.fill();
+    if (n > 1) { ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2 * dpr; ctx.stroke(); }
+    if (arc >= 14) {
+      ctx.save(); ctx.translate(c, c); ctx.rotate(a0 + step / 2);
+      ctx.globalAlpha = 1;   // ook op een gedimde schijf blijft de naam goed leesbaar
+      ctx.font = `${i === hi ? 700 : 600} ${fs * dpr}px ${FONT}`; ctx.fillStyle = hi >= 0 && i !== hi ? '#334155' : k.fg; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+      ctx.fillText(passend(nm, r - hub - 26 * dpr), r - 14 * dpr, 0);
+      ctx.restore();
+    }
+  });
+  ctx.globalAlpha = 1;
+  if (hi >= 0 && n > 1) {   // de getrokken schijf krijgt een rand
+    ctx.beginPath(); ctx.moveTo(c, c); ctx.arc(c, c, r - 1.5 * dpr, hi * step, (hi + 1) * step); ctx.closePath();
+    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 3 * dpr; ctx.lineJoin = 'round'; ctx.stroke();
+  }
+}
 
-            if (names.length === 0) {
-                // Empty state
-                ctx.beginPath();
-                ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-                ctx.fillStyle = '#f1f5f9';
-                ctx.fill();
-                ctx.strokeStyle = '#e2e8f0';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-                return;
-            }
+/* ---------- Tonen ---------- */
+const ICO_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+const ICO_OPEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 16v-5M9.5 13.5 12 11l2.5 2.5"/></svg>';
+const ICO_DRAAI = '<path d="M21 12a9 9 0 1 1-6.22-8.56"/><path d="M21 3v6h-6"/>';
+const ICO_RONDE = '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>';
+const esc = ocShare.esc;
+let laatsteRes = '';
+function render() {
+  if (!$('names')) return;   // de pagina laadt net opnieuw (wissen vanuit de app)
+  const p = pool(), d = state.drawn, n = state.all.length;
+  // Deelnemers
+  let h;
+  if (!n) h = `<div class="empty"><strong>Nog geen deelnemers</strong>Typ hierboven de namen, of bekijk eerst hoe het werkt.<div class="oc-start-btns"><button type="button" class="oc-begin" data-oc-begin="#name-in">Begin met een naam</button><button type="button" class="oc-vb" id="vb-load">Voorbeeld bekijken</button></div><p class="oc-open-row"><button type="button" class="oc-open-link" data-bestand="open">${ICO_OPEN}Open bestand</button></p></div>`;
+  else if (!p.length) h = `<p class="all-done">Iedereen is getrokken.</p>`;
+  else h = `<ul class="names-list" aria-label="Namen in het rad">${p.map((nm, i) => `<li class="name-item"><span class="name-dot" style="background:${kleur(i, p.length).bg}" aria-hidden="true"></span><span class="name-text" title="${esc(nm)}">${esc(nm)}</span><button type="button" class="name-remove" data-remove="${esc(nm)}" aria-label="Verwijder ${esc(nm)}">${ICO_X}</button></li>`).join('')}</ul>`;
+  if (p.length) h += `<p class="names-count">${p.length} ${p.length === 1 ? 'naam' : 'namen'} in het rad${d.length ? ` · ${d.length} getrokken` : ''}</p>`;
+  if ($('names').innerHTML !== h) $('names').innerHTML = h;
+  // Getrokken
+  $('drawn-title').innerHTML = d.length ? `Getrokken <span class="n">(${d.length})</span>` : 'Getrokken';
+  $('drawn').innerHTML = d.length
+    ? `<ol class="drawn-list">${d.map((nm, i) => `<li class="drawn-item${i === d.length - 1 ? ' laatste' : ''}"><span class="drawn-nr" aria-hidden="true">${i + 1}</span><span class="drawn-name"><span class="sr-only">${i + 1}. </span>${esc(nm)}</span></li>`).join('')}</ol>`
+    : `<p class="drawn-empty">Nog niemand getrokken</p>`;
+  const allesGetrokken = n > 0 && !p.length;
+  $('round-btn').hidden = !d.length || allesGetrokken;
+  // Draaiknop
+  const b = $('spin-btn'), kan = p.length >= 2 || (p.length === 1 && d.length > 0);
+  b.disabled = !allesGetrokken && !kan;
+  if (spinning) b.setAttribute('aria-disabled', 'true'); else b.removeAttribute('aria-disabled');
+  const lbl = allesGetrokken ? 'Nieuwe ronde' : p.length === 1 && d.length ? 'Trek de laatste naam' : 'Draai het rad';
+  b.querySelector('span').textContent = lbl;
+  const ico = allesGetrokken ? ICO_RONDE : ICO_DRAAI;
+  if (b.querySelector('svg').innerHTML !== ico) b.querySelector('svg').innerHTML = ico;
+  $('hint').hidden = !kan || spinning;
+  // Resultaat (live regio: alleen aanpassen als er echt iets verandert)
+  let r;
+  if (spinning) r = `<span class="result-tekst">Het rad draait…</span>`;
+  else if (d.length) r = `<span class="result-lbl">Aan de beurt</span><span class="result-naam">${esc(d[d.length - 1])}</span><span class="result-tekst">${p.length ? `Nog ${p.length} in het rad` : 'Iedereen is getrokken'}</span>`;
+  else if (p.length >= 2) r = `<span class="result-tekst">Draai het rad om te zien wie begint.</span>`;
+  else r = `<span class="result-tekst">${n === 1 ? 'Voeg nog een naam toe.' : 'Voeg minstens twee namen toe.'}</span>`;
+  if (r !== laatsteRes) { laatsteRes = r; $('result').innerHTML = r; }
+  $('vb-bar').hidden = !state.voorbeeld;
+  canvas.setAttribute('aria-label', (shown ? shown.names : p).length ? `Rad met ${(shown ? shown.names : p).length} namen` : 'Rad zonder namen');
+  if (!spinning) drawWheel();
+}
 
-            const sliceAngle = (2 * Math.PI) / names.length;
+/* ---------- Draaien ---------- */
+const rnd = () => { try { return crypto.getRandomValues(new Uint32Array(1))[0] / 4294967296; } catch { return Math.random(); } };
+const rustig = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+function draai() {
+  if (spinning) return;
+  const p = pool();
+  if (!p.length && state.drawn.length) { nieuweRonde(); return; }
+  if (p.length < 2 && !(p.length === 1 && state.drawn.length)) return;
+  const i = Math.floor(rnd() * p.length), winnaar = p[i];
+  shown = null; drawWheel();
+  // Het rad stopt met de gekozen schijf onder de wijzer bovenaan (270° in canvas-hoeken), niet altijd in het midden.
+  const step = 360 / p.length, doel = (i + 0.5 + (p.length > 1 ? (rnd() - 0.5) * 0.7 : 0)) * step;
+  const meteen = rustig() || p.length === 1;
+  rotation += (meteen ? 0 : 360 * (5 + Math.floor(rnd() * 3))) + (((270 - doel - rotation) % 360) + 360) % 360;
+  spinning = true; render();
+  const land = () => {
+    spinning = false;
+    state.drawn.push(winnaar);
+    shown = { names: p, hi: i };
+    save(); render();
+    if (!meteen) { $('result').classList.remove('nieuw'); void $('result').offsetWidth; $('result').classList.add('nieuw'); }
+  };
+  if (meteen) {
+    canvas.style.transition = 'none'; canvas.style.transform = `rotate(${rotation}deg)`; void canvas.offsetWidth; canvas.style.transition = '';
+    land();
+  } else {
+    requestAnimationFrame(() => { canvas.style.transform = `rotate(${rotation}deg)`; });
+    setTimeout(land, DUUR + 80);
+  }
+}
+function nieuweRonde() {
+  if (spinning || !state.drawn.length) return;
+  const restore = snapshot();
+  state.drawn = []; shown = null; save(); render();
+  toast('Iedereen staat terug in het rad', restore);
+}
+$('spin-btn').addEventListener('click', () => { if (!spinning) draai(); });
+$('round-btn').addEventListener('click', () => { nieuweRonde(); $('spin-btn').focus(); });
+// Spatie draait het rad, zolang je niet in een veld of op een knop staat.
+document.addEventListener('keydown', e => {
+  if ((e.key !== ' ' && e.code !== 'Space') || e.ctrlKey || e.metaKey || e.altKey || e.defaultPrevented) return;
+  if (e.target.closest && e.target.closest('button, a, input, textarea, select, summary, [contenteditable], [role="menu"]')) return;
+  if (document.querySelector('.ocw-back, .ocs-back') || $('menu').classList.contains('open')) return;
+  e.preventDefault();
+  if (!$('spin-btn').disabled) $('spin-btn').click();
+});
 
-            names.forEach((name, i) => {
-                const startAngle = i * sliceAngle;
-                const endAngle = startAngle + sliceAngle;
+/* ---------- Namen toevoegen, verwijderen, overnemen ---------- */
+function voegToe(lijst) {
+  const have = new Set(state.all.map(lc)), nieuw = [];
+  let dubbel = 0, vol = false;
+  schoon(lijst).forEach(nm => {
+    if (have.has(lc(nm))) { dubbel++; return; }
+    if (state.all.length + nieuw.length >= MAX) { vol = true; return; }
+    have.add(lc(nm)); nieuw.push(nm);
+  });
+  if (nieuw.length) { state.all = state.all.concat(nieuw); shown = null; }
+  return { nieuw, dubbel, vol };
+}
+$('add-form').addEventListener('submit', e => {
+  e.preventDefault();
+  if (spinning) return;
+  const inp = $('name-in'), raw = inp.value.split(/[,;\n]+/);
+  if (!inp.value.trim()) { inp.focus(); return; }
+  const r = voegToe(raw);
+  if (r.nieuw.length) { save(); render(); }
+  inp.value = ''; inp.focus();
+  if (r.vol) toast(`Er kunnen maximaal ${MAX} namen in het rad.`);
+  else if (r.dubbel && !r.nieuw.length) toast(r.dubbel === 1 ? 'Die naam staat er al' : 'Die namen staan er al');
+  else if (r.dubbel) toast(`${r.nieuw.length} toegevoegd. ${r.dubbel} ${r.dubbel === 1 ? 'stond' : 'stonden'} er al.`);
+});
+$('names').addEventListener('click', e => {
+  const x = e.target.closest('[data-remove]');
+  if (x && !spinning) {
+    const nm = x.dataset.remove, restore = snapshot();
+    const li = x.closest('li'), volgende = li && (li.nextElementSibling || li.previousElementSibling);
+    const ander = volgende && volgende.querySelector('[data-remove]') ? volgende.querySelector('[data-remove]').dataset.remove : null;
+    state.all = state.all.filter(a => a !== nm); shown = null; save(); render();
+    const f = ander && [...document.querySelectorAll('[data-remove]')].find(b => b.dataset.remove === ander);
+    (f || $('name-in')).focus({ preventScroll: true });
+    toast(`${nm} verwijderd`, restore);
+  }
+  if (e.target.closest('#vb-load')) {
+    state = { all: VOORBEELD.slice(), drawn: [], voorbeeld: true }; shown = null; save(); render();
+    $('spin-btn').focus();
+  }
+});
+$('vb-wis').addEventListener('click', () => {
+  const restore = snapshot();
+  state = leeg(); shown = null; save(); render();
+  toast('Voorbeeld gewist', restore);
+  const b = document.querySelector('.oc-begin'); b && b.focus();
+});
+$('vb-eigen').addEventListener('click', () => {
+  delete state.voorbeeld; save(); render();
+  toast('Het voorbeeld is nu van jou');
+  $('spin-btn').focus({ preventScroll: true });
+});
+function syncImport() { const b = $('import-btn'); if (b) b.hidden = ocShare.count(['betrokkene'], OC_ID) === 0; }
+$('import-btn').addEventListener('click', async () => {
+  if (spinning) return;
+  const picked = await ocShare.pick({ types: ['betrokkene'], self: OC_ID, title: 'Namen overnemen', intro: 'Kies wie mee in het rad gaat. Wie er al in staat, komt er niet twee keer in.' });
+  if (!picked.length || spinning) return;
+  const restore = snapshot(), r = voegToe(picked.map(x => x.text));
+  if (r.nieuw.length) { save(); render(); }
+  const n = r.nieuw.length;
+  toast(n ? `${n} ${n === 1 ? 'naam' : 'namen'} overgenomen${r.dubbel ? `, ${r.dubbel} ${r.dubbel === 1 ? 'stond' : 'stonden'} er al` : ''}${r.vol ? `. Maximaal ${MAX} namen.` : ''}` : 'Die namen staan er al', n ? restore : undefined);
+  $('import-btn').focus({ preventScroll: true });
+});
+['focus', 'storage'].forEach(ev => window.addEventListener(ev, () => setTimeout(syncImport, 50)));
+document.addEventListener('visibilitychange', () => { if (!document.hidden) syncImport(); });
 
-                // Draw slice
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-                ctx.closePath();
-                ctx.fillStyle = colors[i % colors.length];
-                ctx.fill();
+/* ---------- Alles wissen (menu ⋮ en "Opnieuw beginnen") ---------- */
+async function wisAlles() {
+  if (spinning) return;
+  if (!state.all.length) { toast('Er is nog niets om te wissen.'); return; }
+  if (state.voorbeeld) { $('vb-wis').click(); return; }
+  if (!await ocConfirm(`Alles wissen in ${OC_TOOL}?`, 'Alle namen en de lijst Getrokken verdwijnen. Je kan dit nog ongedaan maken tot je iets anders doet.', 'Alles wissen')) return;
+  const copy = JSON.parse(JSON.stringify(state));
+  state = leeg(); shown = null; save(); render();
+  ocShare.clear(OC_ID);
+  toast('Alles gewist', ocUndoable(() => { state = copy; shown = null; }));
+}
+document.addEventListener('click', e => { if (e.target.closest('[data-act="wipe"]')) wisAlles(); });
 
-                // Border
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-                ctx.lineWidth = 2;
-                ctx.stroke();
+/* ---------- Andere tabbladen gelijk houden, maat van het rad ---------- */
+window.addEventListener('storage', e => { if (e.key === KEY && !spinning) { state = load(); shown = null; render(); } });
+try { new ResizeObserver(() => { if (!spinning) drawWheel(); }).observe(canvas); } catch { window.addEventListener('resize', () => { if (!spinning) drawWheel(); }); }
+try { document.fonts.ready.then(() => { if (!spinning) drawWheel(); }); } catch {}
 
-                // Text
-                ctx.save();
-                ctx.translate(centerX, centerY);
-                ctx.rotate(startAngle + sliceAngle / 2);
-                ctx.textAlign = 'right';
-                ctx.fillStyle = '#fff';
-                ctx.font = `600 ${Math.min(22, 360 / names.length)}px DM Sans`;
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-                ctx.shadowBlur = 3;
-                
-                let displayName = name;
-                if (displayName.length > 12) {
-                    displayName = displayName.substring(0, 11) + '…';
-                }
-                ctx.fillText(displayName, radius - 40, 6);
-                ctx.restore();
-            });
-        }
+render();
+syncImport();
+</script>
+<script>
+/* Menu (⋮) openen en sluiten met muis, aanraking en toetsenbord */
+(() => {
+  const btn = document.getElementById('menu-btn'), menu = document.getElementById('menu'); if (!btn || !menu) return;
+  const items = () => [...menu.querySelectorAll('[role="menuitem"]')];
+  const zet = (o, terug) => { menu.classList.toggle('open', o); btn.setAttribute('aria-expanded', String(o)); if (!o && terug) btn.focus(); };
+  btn.addEventListener('click', e => { e.stopPropagation(); const o = !menu.classList.contains('open'); zet(o); if (o && e.detail === 0) { const f = items()[0]; f && f.focus(); } });
+  menu.addEventListener('click', e => { if (e.target.closest('[role="menuitem"]')) zet(false); });
+  document.addEventListener('click', e => { if (menu.classList.contains('open') && !e.target.closest('.oc-menu-wrap')) zet(false); });
+  document.addEventListener('keydown', e => {
+    if (!menu.classList.contains('open')) return;
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); zet(false, true); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const l = items(), i = l.indexOf(document.activeElement); l[(i + (e.key === 'ArrowDown' ? 1 : -1) + l.length) % l.length].focus(); }
+  }, true);
+  menu.addEventListener('focusout', e => { if (e.relatedTarget && !e.relatedTarget.closest('.oc-menu-wrap')) zet(false); });
+})();
+</script>
+<script>
+/* Opnieuw beginnen: zichtbaar zodra er echt iets ingevuld is; start de eigen 'Alles wissen' van de tool.
+   'Leeg' = wat de tool zelf bewaart zonder inbreng van de gebruiker (na een eerste bezoek of na wissen). */
+(() => {
+  const meta = document.querySelector('meta[name="oc:opslag"]');
+  const keys = meta ? meta.content.split(',').map(s => s.trim()).filter(k => k && !k.startsWith('oc.share.') && !k.endsWith('*')) : [];
+  const BASE = 'oc.leeg.' + location.pathname;   // niet onder oc-app.*: dat wist het gegevensscherm apart
+  const get = k => { try { return localStorage.getItem(k); } catch { return null; } };
+  const vals = () => Object.fromEntries(keys.map(k => [k, get(k)]));
+  const has = v => Array.isArray(v) ? v.length > 0 : v && typeof v === 'object' ? Object.values(v).some(has) : typeof v === 'string' && v.trim().length > 0;
+  const content = raw => { try { return has(JSON.parse(raw)); } catch { return !!raw; } };
+  let base = null; try { base = JSON.parse(get(BASE) || 'null'); } catch {}
+  const setBase = () => { base = vals(); try { localStorage.setItem(BASE, JSON.stringify(base)); } catch {} sync(); };
+  const filled = () => { const v = vals(); return keys.some(k => v[k] != null && content(v[k]) && !(base && v[k] === base[k])); };
+  const row = document.getElementById('oc-restart-row');
+  function sync() { row.hidden = !filled() || !document.querySelector('[data-act="wipe"]'); }
+  let t; const later = () => { clearTimeout(t); t = setTimeout(sync, 350); };
+  ['click', 'input', 'change', 'keyup'].forEach(ev => document.addEventListener(ev, later, true));
+  window.addEventListener('storage', later); window.addEventListener('focus', later);
+  // Eerste bezoek: wat de tool zelf meteen bewaart, telt als leeg. Een tool die nog niets klaarlegde
+  // voor andere tools (oc.share.*), heeft nog geen echte inhoud.
+  const share = meta ? meta.content.split(',').map(s => s.trim()).find(k => k.startsWith('oc.share.')) : null;
+  if (!base && share && get(share) == null) setBase();
+  else if (keys.every(k => get(k) == null)) setTimeout(setBase, 900);
+  // Na wissen (via deze knop of het menu): de nieuwe toestand is de lege toestand.
+  document.addEventListener('click', e => {
+    if (!e.target.closest('[data-act="wipe"]')) return;
+    const before = JSON.stringify(vals()); let n = 0;
+    const iv = setInterval(() => {
+      if (++n > 40) return clearInterval(iv);
+      if (document.querySelector('.ocw-back')) return;               // bevestiging staat nog open
+      if (JSON.stringify(vals()) !== before) { clearInterval(iv); setTimeout(setBase, 400); }
+      else if (n > 5) clearInterval(iv);                              // geannuleerd
+    }, 150);
+  }, true);
+  document.getElementById('oc-restart-btn').addEventListener('click', () => { const w = document.querySelector('[data-act="wipe"]'); w && w.click(); });
+  sync();
+})();
+</script>
+<input type="file" id="oc-bestand-in" accept=".json,application/json" hidden>
+<script>
+/* oc-bestand: je werk in deze tool bewaren als bestand en later (of op een ander toestel) weer openen.
+   Formaat = dat van de reservekopie in de app: { app:'Onder Constructie', version:1, created, tool, data:{ sleutel: tekst } }.
+   Een reservekopie uit de app kan je hier ook openen: de tool neemt er alleen zijn eigen deel uit. */
+window.ocBestand = (function () {
+  function patronen() {
+    var m = document.querySelector('meta[name="oc:opslag"]');
+    return m ? m.content.split(',').map(function (s) { return s.trim(); }).filter(Boolean) : [];
+  }
+  function past(k, p) { return p.slice(-1) === '*' ? k.indexOf(p.slice(0, -1)) === 0 : k === p; }
+  function eigen(k) { return patronen().some(function (p) { return past(k, p); }); }
+  function sleutels() {
+    var uit = [];
+    try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && eigen(k)) uit.push(k); } } catch (e) {}
+    return uit;
+  }
+  function naam() {
+    var m = document.querySelector('meta[name="oc:titel"]') || document.querySelector('meta[name="application-name"]');
+    return (m && m.content) || (document.title.split(/\s[–-]\s/)[0] || 'tool').trim();
+  }
+  function slug(s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+  /* bewaar(): downloadt het bestand. Geeft het aantal bewaarde sleutels terug (0 = niets om te bewaren). */
+  function bewaar(extraNaam) {
+    var keys = sleutels(); if (!keys.length) return 0;
+    var data = {}; keys.forEach(function (k) { try { data[k] = localStorage.getItem(k); } catch (e) {} });
+    var id = location.pathname.replace(/\/index\.html$/, '').split('/').filter(Boolean).pop() || 'tool';
+    var blob = new Blob([JSON.stringify({ app: 'Onder Constructie', version: 1, created: new Date().toISOString(), tool: id, data: data }, null, 1)], { type: 'application/json' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    var stuk = slug(naam()) + (extraNaam ? '-' + slug(extraNaam) : '');
+    a.download = stuk + '-' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    return keys.length;
+  }
+  /* lees(file): Promise met { data: {sleutel: tekst} } van alleen de eigen sleutels.
+     Fout 'vorm' = geen bestand van Onder Constructie; fout 'leeg' = niets van deze tool in het bestand. */
+  function lees(file) {
+    return file.text().then(function (t) {
+      var d; try { d = JSON.parse(t); } catch (e) { throw new Error('vorm'); }
+      if (!d || d.app !== 'Onder Constructie' || typeof d.data !== 'object' || !d.data) throw new Error('vorm');
+      var uit = {}, n = 0;
+      Object.keys(d.data).forEach(function (k) { if (eigen(k) && typeof d.data[k] === 'string') { uit[k] = d.data[k]; n++; } });
+      if (!n) throw new Error('leeg');
+      return { data: uit, aantal: n, created: d.created || null };
+    });
+  }
+  /* zetTerug(gelezen): vervangt het huidige werk van deze tool door wat in het bestand staat, en laat andere tabbladen herladen. */
+  function zetTerug(g) {
+    sleutels().forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+    Object.keys(g.data).forEach(function (k) { try { localStorage.setItem(k, g.data[k]); } catch (e) {} });
+  }
+  function melding(err) {
+    return err && err.message === 'leeg' ? 'In dit bestand staat niets van ' + naam() + '.'
+      : 'Dit bestand kan ik niet openen. Kies een bestand dat je met "Bewaar als bestand" of als reservekopie maakte.';
+  }
+  return { bewaar: bewaar, lees: lees, zetTerug: zetTerug, melding: melding, sleutels: sleutels, naam: naam };
+})();
+</script>
+<script>
+/* Bewaar als bestand / Open bestand */
+(() => {
+  const heeftWerk = () => { try { return !document.getElementById('oc-restart-row').hidden; } catch (e) { return true; } };
+  const extraNaam = () => { try { return String((L => Array.isArray(L) && L.length === 1 ? L[0].name : '')(state.lists) || '').trim(); } catch (e) { return ''; } };
+  const inp = document.getElementById('oc-bestand-in');
+  // Een lange melding blijft langer staan (minstens 4,5 s): toon ze opnieuw voor ze verdwijnt.
+  const lang = msg => { toast(msg); setTimeout(() => { const t = document.getElementById('toast-text'); if (t && t.textContent === msg) toast(msg); }, 2300); };
+  const sluit = () => { const m = document.getElementById('menu'), b = document.getElementById('menu-btn'); if (m) m.classList.remove('open'); if (b) b.setAttribute('aria-expanded', 'false'); };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-bestand]'); if (!b) return;
+    sluit();
+    if (b.dataset.bestand === 'bewaar') {
+      if (!heeftWerk() || !ocBestand.bewaar(extraNaam())) { toast('Er is nog niets om te bewaren.'); return; }
+      toast('Bestand gedownload');
+    } else { inp.value = ''; inp.click(); }
+  });
+  inp.addEventListener('change', async () => {
+    const f = inp.files && inp.files[0]; if (!f) return;
+    let g; try { g = await ocBestand.lees(f); } catch (err) { lang(ocBestand.melding(err)); return; }
+    if (heeftWerk() && !await ocConfirm('Bestand openen?', 'Dit vervangt wat nu in ' + ocBestand.naam() + ' staat. Doorgaan?', 'Vervang')) return;
+    // Tot de herlaadbeurt mag niets het teruggezette werk nog overschrijven (uitgestelde bewaring, pagehide, ander tabblad).
+    const pat = (document.querySelector('meta[name="oc:opslag"]') || {}).content || '';
+    const eigen = k => pat.split(',').map(s => s.trim()).filter(Boolean).some(p => p.slice(-1) === '*' ? String(k).indexOf(p.slice(0, -1)) === 0 : k === p);
+    ocBestand.zetTerug(g);
+    try {
+      const set = Storage.prototype.setItem, rem = Storage.prototype.removeItem;
+      Storage.prototype.setItem = function (k, v) { if (this === localStorage && eigen(k)) return; return set.call(this, k, v); };
+      Storage.prototype.removeItem = function (k) { if (this === localStorage && eigen(k)) return; return rem.call(this, k); };
+    } catch (e) {}
+    location.reload();
+  });
+})();
+</script>
+<script>
+/* oc-sync: reageert op "Wissen" in de app (ook in andere tabbladen) en geeft Esc door aan de app */
+(function () {
+  if (window.__ocSync) return; window.__ocSync = true;
+  var gewist = false;
+  function wis() {
+    if (gewist) return; gewist = true;
+    try { var orig = Storage.prototype.setItem; Storage.prototype.setItem = function (k, v) { if (k === 'oc.wis') return orig.call(this, k, v); }; } catch (e) {}
+    try { document.body.innerHTML = '<p role="status" style="font-family:\'DM Sans\',system-ui,sans-serif;padding:3rem 1.5rem;text-align:center;color:#475569;font-size:1.0625rem">Er is iets veranderd op dit toestel. Deze pagina laadt opnieuw…</p>'; } catch (e) {}
+    setTimeout(function () { location.reload(); }, 400);
+  }
+  try { var bc = new BroadcastChannel('oc-sync'); bc.onmessage = function (e) { if (e.data && e.data.type === 'wis') wis(); }; } catch (e) {}
+  addEventListener('storage', function (e) { if (e.key === 'oc.wis' || e.key === null) wis(); });
+  /* Gebruikerstest november 2026, voor alle tools:
+     Ctrl/Cmd+Z doet "Ongedaan" zolang die melding zichtbaar is (in een tekstveld doet de browser zijn eigen ongedaan);
+     een rij keuzeknoppen (role="radiogroup") is één Tab-stop, de pijltjes gaan naar een andere keuze, Spatie of Enter kiest;
+     een naamveld met data-oc-titel ziet eruit als een veld (potloodje, onderlijn bij aanwijzen of typen);
+     een naam getypt in een veld met data-oc-projectnaam wordt de projectnaam van de app, als die nog leeg is. */
+  var STANDAARD = /^((mijn|nieuwe?) )?(project|analyse|lijst|keuze|kaart|ideeënkaart|doelgroep|matrix|plan|groep|team|tabel|informatietabel|log|retro|sprint|scan|proces)( \d+)?$|^naamloos$|^hele organisatie$/i;
+  window.ocStandaardNaam = function (v) { v = String(v || '').trim(); return !v || STANDAARD.test(v); };
+  function typt(a) { return a && (a.isContentEditable || a.tagName === 'TEXTAREA' || a.tagName === 'SELECT' || (a.tagName === 'INPUT' && !/^(checkbox|radio|button|submit|reset|range|color|file)$/i.test(a.type))); }
+  function zichtbaar(x) {
+    if (x.disabled || x.hidden || !x.getClientRects().length) return false;
+    for (var el = x; el && el.nodeType === 1; el = el.parentElement) { var cs = getComputedStyle(el); if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity < 0.1) return false; }
+    var r = x.getBoundingClientRect(); return r.bottom > 0 && r.right > 0 && r.top < innerHeight && r.left < innerWidth;
+  }
+  addEventListener('keydown', function (e) {
+    if (e.defaultPrevented || !(e.ctrlKey || e.metaKey) || e.shiftKey || e.altKey || String(e.key).toLowerCase() !== 'z' || typt(document.activeElement)) return;
+    var b = [].filter.call(document.querySelectorAll('[role="status"] button, [aria-live] button'), function (x) { return /^\s*ongedaan/i.test(x.textContent) && zichtbaar(x); }).pop();
+    if (b) { e.preventDefault(); b.click(); }
+  });
+  function radios(g) { return [].filter.call(g.querySelectorAll('[role="radio"]'), function (x) { return x.closest('[role="radiogroup"]') === g; }); }
+  function bruikbaar(x) { return !x.disabled && x.getAttribute('aria-disabled') !== 'true' && x.getClientRects().length; }
+  // Kiezen met Spatie of Enter laat de tool vaak opnieuw tekenen: de focus blijft dan op de gekozen keuze.
+  var terug = null;
+  document.addEventListener('click', function (e) {
+    var x = e.detail === 0 && e.target && e.target.closest && e.target.closest('[role="radio"]'); if (!x || x.tagName === 'INPUT') return;
+    var s = [].map.call(x.attributes, function (a) { return a.name === 'id' || /^data-/.test(a.name) ? '[' + a.name + '="' + (window.CSS && CSS.escape ? CSS.escape(a.value) : a.value) + '"]' : ''; }).join('');
+    terug = s ? { s: '[role="radio"]' + s, t: Date.now() } : null;
+  }, true);
+  function roving() {
+    var a0 = document.activeElement;
+    if (terug && Date.now() - terug.t < 2000 && (!a0 || a0 === document.body)) { var y = document.querySelector(terug.s); if (y) try { y.focus({ preventScroll: true }); } catch (e) {} terug = null; }
+    [].forEach.call(document.querySelectorAll('[role="radiogroup"]'), function (g) {
+      var r = radios(g); if (!r.length || r.some(function (x) { return x.tagName === 'INPUT'; })) return;
+      var a = document.activeElement, keep = r.indexOf(a) >= 0 ? a : r.filter(function (x) { return x.getAttribute('aria-checked') === 'true' && bruikbaar(x); })[0] || r.filter(bruikbaar)[0] || r[0];
+      r.forEach(function (x) { var t = x === keep ? '0' : '-1'; if (x.getAttribute('tabindex') !== t) x.setAttribute('tabindex', t); });
+    });
+  }
+  document.addEventListener('keydown', function (e) {
+    var x = e.target, d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1, Home: -2, End: 2 }[e.key];
+    if (!d || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || !x.getAttribute || x.getAttribute('role') !== 'radio' || x.tagName === 'INPUT') return;
+    var g = x.closest('[role="radiogroup"]'); if (!g) return;
+    var r = radios(g).filter(bruikbaar), i = r.indexOf(x); if (i < 0) return;
+    var n = r[d === -2 ? 0 : d === 2 ? r.length - 1 : (i + d + r.length) % r.length];
+    e.preventDefault(); r.forEach(function (y) { y.setAttribute('tabindex', y === n ? '0' : '-1'); }); n.focus();
+  });
+  var meet = null;
+  function titels() {
+    [].forEach.call(document.querySelectorAll('input[data-oc-titel]'), function (el) {
+      if (!el.offsetParent) return;
+      var cs = getComputedStyle(el), t = el.value || el.placeholder || '';
+      if (!meet) { meet = document.createElement('span'); meet.setAttribute('aria-hidden', 'true'); meet.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden;white-space:pre'; document.body.appendChild(meet); }
+      meet.style.font = cs.font; meet.style.letterSpacing = cs.letterSpacing; meet.textContent = t;
+      var w = meet.getBoundingClientRect().width;
+      var px = Math.ceil(w + parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) + parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth) + 8) + 'px';
+      if (el.style.width !== px) el.style.width = px;
+    });
+  }
+  function opmaak() {
+    if (!document.getElementById('oc-sync-stijl') && document.querySelector('[data-oc-titel]')) {
+      var s = document.createElement('style'); s.id = 'oc-sync-stijl';
+      s.textContent = 'input[data-oc-titel]{flex:0 1 auto!important;max-width:100%;min-width:5.5em;box-sizing:border-box;text-overflow:ellipsis;cursor:text;border-radius:6px 6px 0 0;padding-right:26px!important;'
+        + 'border-bottom:1.5px dashed transparent!important;background-repeat:no-repeat!important;background-position:right 4px center!important;background-size:15px 15px!important;'
+        + 'background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%2394a3b8%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M12 20h9%27/%3E%3Cpath d=%27M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z%27/%3E%3C/svg%3E")!important}'
+        + 'input[data-oc-titel]:hover{border-bottom-color:#cbd5e1!important}'
+        + 'input[data-oc-titel]:focus{border-bottom:1.5px solid #047857!important;background-image:none!important}'
+        + 'input[data-oc-titel]::placeholder{color:#94a3b8;opacity:1}'
+        + 'input[data-oc-titel]+*{margin-left:auto}';
+      document.head.appendChild(s);
+    }
+    titels();
+  }
+  var gepland = false;
+  function later() { if (gepland) return; gepland = true; requestAnimationFrame(function () { gepland = false; roving(); opmaak(); }); }
+  function start() {
+    later();
+    try { new MutationObserver(later).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['aria-checked', 'hidden', 'class'] }); } catch (e) {}
+    document.addEventListener('input', function (e) { if (e.target.hasAttribute && e.target.hasAttribute('data-oc-titel')) titels(); }, true);
+    addEventListener('resize', later);
+    try { document.fonts.ready.then(titels); document.fonts.addEventListener('loadingdone', titels); } catch (e) {}   // de letters komen soms pas later binnen
+    setInterval(function () { if (!document.hidden) titels(); }, 700);   // een tool kan de waarde zetten zonder de pagina te wijzigen
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', start) : start();
+  var eigenNaam = null, naamT = null;
+  function projectNu() { try { var p = JSON.parse(localStorage.getItem('oc.project')); return p && typeof p.name === 'string' ? p.name.trim() : ''; } catch (e) { return ''; } }
+  function deelNaam(el) {
+    var v = String(el.value || '').trim().slice(0, 80), nu = projectNu();
+    if (ocStandaardNaam(v) || (nu && nu !== eigenNaam)) return;
+    if ([].some.call(document.querySelectorAll('.vb-bar'), function (b) { return b.getClientRects().length; })) return;   // in het voorbeeld niet
+    if (v === nu) return;
+    try { localStorage.setItem('oc.project', JSON.stringify({ name: v, since: Date.now() })); eigenNaam = v; } catch (e) {}
+  }
+  document.addEventListener('input', function (e) { var el = e.target; if (!el.hasAttribute || !el.hasAttribute('data-oc-projectnaam')) return; clearTimeout(naamT); naamT = setTimeout(function () { deelNaam(el); }, 900); }, true);
+  ['change', 'focusout'].forEach(function (ev) { document.addEventListener(ev, function (e) { var el = e.target; if (el.hasAttribute && el.hasAttribute('data-oc-projectnaam')) { clearTimeout(naamT); deelNaam(el); } }, true); });
+  /* oc-terug: kom je uit een andere tool, dan brengt de terugknop linksboven je daar terug ("← Prioriteren").
+     Anders blijft hij naar de groep gaan (Projectmanagement, Zakmes, Reset). In de app regelt de app dit zelf. */
+  (function () {
+    if (window.__ocTerug) return; window.__ocTerug = true;
+    var ss; try { ss = window.sessionStorage; ss.getItem('x'); } catch (e) { return; }
+    var hier = location.pathname, vorige = null;
+    try { vorige = ss.getItem('oc.hier'); ss.setItem('oc.hier', location.href); } catch (e) {}
+    addEventListener('pageshow', function () { try { ss.setItem('oc.hier', location.href); } catch (e) {} });
+    var naam = (document.title || '').split(/\s+[–-]\s+Onder Constructie/)[0].trim();
+    try { if (naam && naam.length < 60) ss.setItem('oc.naam:' + hier, naam); } catch (e) {}
+    if (window.top !== window) return;
+    function zet() {
+      var a = document.querySelector('a.back-link, a.crumb'); if (!a || a.dataset.ocTerug) return;
+      var ref = document.referrer, u; if (!ref) return;
+      try { u = new URL(ref); } catch (e) { return; }
+      if (u.origin !== location.origin || u.pathname === hier) return;
+      try { if (new URL(a.href, location.href).pathname === u.pathname) return; } catch (e) { return; }
+      var bron = null; try { bron = ss.getItem('oc.naam:' + u.pathname); } catch (e) {}
+      if (!bron) return;
+      a.dataset.ocTerug = '1';
+      var sp = a.querySelector('span');
+      if (sp) sp.textContent = bron;
+      else {
+        var eerste = true;
+        [].slice.call(a.childNodes).forEach(function (n) { if (n.nodeType === 3 && n.nodeValue.trim()) { n.nodeValue = eerste ? ' ' + bron + ' ' : ''; eerste = false; } });
+      }
+      a.setAttribute('aria-label', 'Terug naar ' + bron);
+      a.href = ref;
+      var terug = vorige === ref;   // de vorige pagina in dit tabblad is die tool: echt teruggaan, dan staat alles nog zoals je het liet
+      a.addEventListener('click', function (e) {
+        if (!terug || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+        e.preventDefault(); history.back();
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', zet); else zet();
+  }());
+  /* oc-overnemen: de knop "Overnemen uit…" valt op als knop en zegt wat er klaarligt ("5 taken uit Retro en Risicomatrix"). */
+  (function () {
+    var VEEL = { taak: 'taken', actie: 'acties', risico: "risico's", betrokkene: 'betrokkenen', besluit: 'besluiten', doel: 'doelen' };
+    var EEN = { taak: 'taak', actie: 'actie', risico: 'risico', betrokkene: 'betrokkene', besluit: 'besluit', doel: 'doel' };
+    var zelf = '';
+    try { var mt = document.querySelector('meta[name="oc:opslag"]'), mz = mt && /oc\.share\.([\w-]+)/.exec(mt.content); zelf = mz ? mz[1] : ''; } catch (e) {}
+    function esc(v) { return String(v).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function samenvatting(types) {
+      var tools = [], perType = {}, n = 0, keys = [];
+      try { for (var i = 0; i < localStorage.length; i++) keys.push(localStorage.key(i)); } catch (e) { return ''; }
+      keys.forEach(function (k) {
+        if (!k || k.indexOf('oc.share.') !== 0 || k === 'oc.share.' + zelf) return;
+        try {
+          var d = JSON.parse(localStorage.getItem(k)), m = 0; if (!d || !Array.isArray(d.lists)) return;
+          d.lists.forEach(function (l) { (l && Array.isArray(l.items) ? l.items : []).forEach(function (it) {
+            if (it && types.indexOf(it.type) >= 0 && typeof it.text === 'string') { m++; perType[it.type] = (perType[it.type] || 0) + 1; }
+          }); });
+          if (m) { n += m; tools.push({ naam: String(d.tool || d.id || k.slice(9)), t: +d.updated || 0 }); }
+        } catch (e) {}
+      });
+      if (!n) return '';
+      tools.sort(function (a, b) { return b.t - a.t; });
+      var nm = tools.map(function (x) { return x.naam; }), soort = Object.keys(perType);
+      var wat = soort.length === 1 && VEEL[soort[0]] ? n + ' ' + (n === 1 ? EEN[soort[0]] : VEEL[soort[0]]) : n + (n === 1 ? ' punt' : ' punten');
+      var uit = nm.length === 1 ? nm[0] : nm.length === 2 ? nm[0] + ' en ' + nm[1] : nm[0] + ', ' + nm[1] + ' en ' + (nm.length - 2) + ' andere';
+      return wat + ' uit ' + uit;
+    }
+    var stijl = false;
+    function css() {
+      if (stijl || document.getElementById('oc-imp-stijl')) return; stijl = true;
+      var s = document.createElement('style'); s.id = 'oc-imp-stijl';
+      s.textContent = 'button.oc-import.oc-imp2{display:inline-flex;align-items:center;gap:.625rem;max-width:100%;min-height:52px;margin:0;padding:.4375rem .75rem .4375rem .4375rem;border:1.5px solid #a7f3d0;border-radius:12px;background:#ecfdf5;color:#065f46;font:inherit;text-align:left;white-space:normal;cursor:pointer;box-shadow:none;transition:background .12s,border-color .12s}'
+        + 'button.oc-import.oc-imp2:hover{background:#d1fae5;border-color:#10b981}button.oc-import.oc-imp2[hidden]{display:none}'
+        + '.oc-imp2 .oc-imp-ico{flex:none;width:34px;height:34px;border-radius:9px;background:#fff;color:#047857;display:grid;place-items:center;box-shadow:inset 0 0 0 1px #a7f3d0}'
+        + '.oc-imp2 .oc-imp-ico svg{width:18px;height:18px}.oc-imp2 .oc-imp-t{display:flex;flex-direction:column;min-width:0;line-height:1.25}'
+        + '.oc-imp2 .oc-imp-t b{font-size:.875rem;font-weight:700;color:#065f46}'
+        + '.oc-imp2 .oc-imp-t small{font-size:.8125rem;font-weight:500;color:#047857;overflow-wrap:anywhere}'
+        + '.oc-imp2 .oc-imp-pijl{flex:none;width:18px;height:18px;margin-left:auto;color:#047857}'
+        + '@media (prefers-reduced-motion:reduce){button.oc-import.oc-imp2{transition:none}}';
+      document.head.appendChild(s);
+    }
+    var ICO = '<span class="oc-imp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11M7.5 9.5L12 14l4.5-4.5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></span>';
+    var PIJL = '<svg class="oc-imp-pijl" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+    function versier() {
+      var bs = document.querySelectorAll('button.oc-import[data-oc-types]'); if (!bs.length) return;
+      css();
+      [].forEach.call(bs, function (b) {
+        var sam = samenvatting(String(b.dataset.ocTypes).split(',').map(function (x) { return x.trim(); }));
+        if (b.dataset.ocSam === sam && b.querySelector('.oc-imp-t')) return;
+        b.dataset.ocSam = sam; b.classList.add('oc-imp2');
+        b.innerHTML = ICO + '<span class="oc-imp-t"><b>Overnemen uit andere tools</b>' + (sam ? '<small>' + esc(sam) + '</small>' : '') + '</span>' + PIJL;
+      });
+    }
+    var gepland = false;
+    function plan() { if (gepland) return; gepland = true; (window.requestAnimationFrame || setTimeout)(function () { gepland = false; versier(); }); }
+    try { new MutationObserver(plan).observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
+    addEventListener('storage', plan); addEventListener('focus', plan); addEventListener('pageshow', plan);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', plan); else plan();
+  }());
+  if (window.parent === window) return;
+  addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape' || e.defaultPrevented) return;
+    var a = document.activeElement;
+    if (a && (a.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))) return;
+    if (document.querySelector('dialog[open], [role="dialog"]:not([hidden]):not([aria-hidden="true"]), [aria-modal="true"]:not([hidden]), [aria-expanded="true"], .open, .show, .active.modal, .is-open')) return;
+    try { parent.postMessage({ type: 'oc-esc' }, location.origin); } catch (err) {}
+  }, true);
+})();
+</script>
+<script>
+/* Eenheid: "Begin met ..." zet de cursor in het eerste veld; staat er een standaardnaam, dan is die geselecteerd zodat je meteen overtypt */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-oc-begin]'); if (!b) return;
+  const el = [...document.querySelectorAll(b.dataset.ocBegin)].find(x => x.offsetParent !== null); if (!el) return;
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  el.scrollIntoView({ block:'center', behavior: still ? 'auto' : 'smooth' });
+  el.focus({ preventScroll:true });
+  if (el.select && /^(INPUT|TEXTAREA)$/.test(el.tagName) && el.value.trim() && /^((mijn|nieuwe?) )?(project|analyse|lijst|keuze|kaart|ideeënkaart|doelgroep|matrix|plan|groep|team|tabel|informatietabel|log|retro|sprint|scan|proces)( \d+)?$|^naamloos$|^hele organisatie$/i.test(el.value.trim())) el.select();
+});
+</script>
+<script>
+/* oc-uitleg v1 begin */
+/* "Hoe werkt dit?": zet de gewone uitleg in <details class="explain"><div class="inner"> om tot een kaart met
+   inleiding, genummerde stappen, tip en verwijzingen naar andere tools. De tekst zelf blijft in de HTML staan,
+   dus zonder JavaScript is alles nog gewoon leesbaar. Sturen per tool kan met data-uitleg op een lijst of alinea:
+   "stappen" (genummerd), "begrippen" (zonder nummers), "lijst" (laten zoals hij is), "tip", "noot", "stil". */
+(function () {
+  var d = document.querySelector('details.explain');
+  if (!d || d.classList.contains('oc-u')) return;
+  var sum = d.querySelector(':scope > summary'), inner = d.querySelector(':scope > .inner');
+  if (!sum || !inner) return;
+  var SLUG = 'hoe-werkt-dit';
+  var SVG = function (b, w) { return '<svg viewBox="0 0 ' + (w || 24) + ' ' + (w || 24) + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + b + '</svg>'; };
+  var ICO = {
+    kaart: '<svg viewBox="0 0 28 28" fill="none" aria-hidden="true" focusable="false">'
+      + '<circle cx="7" cy="6.5" r="2.25" fill="#047857"/><circle cx="7" cy="14" r="2.25" fill="#10b981"/><circle cx="7" cy="21.5" r="2.25" fill="#10b981"/>'
+      + '<path d="M13 6.5h9.5M13 14h6.5M13 21.5h8" stroke="#10b981" stroke-width="2.25" stroke-linecap="round"/></svg>',
+    pijl: SVG('<path d="M6 9l6 6 6-6"/>'),
+    tip: SVG('<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/>'),
+    stil: SVG('<rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'),
+    naar: SVG('<path d="M8 16L16 8M9.5 8H16v6.5"/>')
+  };
+  var maak = function (tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+  var tekst = function (e) { return (e.textContent || '').replace(/\s+/g, ' ').trim(); };
+  var soort = function (e) { return (e.getAttribute('data-uitleg') || '').toLowerCase(); };
 
-        // Update names list
-        function updateNamesList() {
-            if (names.length === 0) {
-                namesList.innerHTML = `
-                    <div class="empty-state">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                        <p>Nog geen deelnemers</p>
-                    </div>
-                `;
-            } else {
-                namesList.innerHTML = names.map((name, i) => `
-                    <div class="name-item">
-                        <span class="name-color" style="background: ${colors[i % colors.length]}"></span>
-                        <span class="name-text">${ocShare.esc(name)}</span>
-                        <button class="name-remove" type="button" data-remove="${i}" title="Verwijderen" aria-label="Verwijder ${ocShare.esc(name)}">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path d="M18 6L6 18M6 6l12 12"/>
-                            </svg>
-                        </button>
-                    </div>
-                `).join('');
-            }
-            namesCount.textContent = names.length;
-            spinBtn.disabled = names.length < 2;
-        }
+  // eerste tekst van een stuk DOM netjes laten beginnen: leestekens weg, hoofdletter
+  function netjesBegin(node) {
+    var w = document.createTreeWalker(node, NodeFilter.SHOW_TEXT), t;
+    while ((t = w.nextNode())) {
+      var s = t.nodeValue.replace(/^[\s:.,;]+/, '');
+      if (!s) { t.nodeValue = ''; continue; }
+      t.nodeValue = s.charAt(0).toUpperCase() + s.slice(1);
+      return true;
+    }
+    return false;
+  }
+  // toetsen als toets tonen
+  var TOETS = /(^|[^\wÀ-ÿ+])(Shift\+Tab|Alt\+↑|Alt\+↓|Enter|Escape|Esc|Backspace|Delete|F2|Tab)(?![\wÀ-ÿ])/g;
+  function toetsen(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), lijst = [], t;
+    while ((t = w.nextNode())) { TOETS.lastIndex = 0; if (TOETS.test(t.nodeValue) && !t.parentNode.closest('a, kbd, code')) lijst.push(t); }
+    lijst.forEach(function (t) {
+      var s = t.nodeValue, frag = document.createDocumentFragment(), van = 0, m;
+      TOETS.lastIndex = 0;
+      while ((m = TOETS.exec(s))) {
+        var start = m.index + m[1].length;
+        frag.appendChild(document.createTextNode(s.slice(van, start)));
+        var k = document.createElement('kbd'); k.textContent = m[2]; frag.appendChild(k);
+        van = start + m[2].length;
+      }
+      frag.appendChild(document.createTextNode(s.slice(van)));
+      t.parentNode.replaceChild(frag, t);
+    });
+  }
+  // begint dit lijstitem met een vetgedrukte titel?
+  function kopVan(li) {
+    for (var n = li.firstChild; n; n = n.nextSibling) {
+      if (n.nodeType === 3 && !n.nodeValue.trim()) continue;
+      return n.nodeType === 1 && /^(B|STRONG)$/.test(n.tagName) ? n : null;
+    }
+    return null;
+  }
 
-        // Update drawn list
-        function updateDrawnList() {
-            if (drawnNames.length === 0) {
-                drawnList.innerHTML = `
-                    <div class="empty-state">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                        <p>Nog niemand getrokken</p>
-                    </div>
-                `;
-            } else {
-                drawnList.innerHTML = drawnNames.map((name, i) => `
-                    <div class="drawn-item">
-                        <span class="drawn-number">${i + 1}</span>
-                        <span class="drawn-name">${ocShare.esc(name)}</span>
-                    </div>
-                `).join('');
-            }
-        }
+  var kids = Array.prototype.slice.call(inner.children);
+  var lijsten = kids.filter(function (k) { return /^(UL|OL)$/.test(k.tagName) && soort(k) !== 'lijst'; });
+  var metKop = lijsten.filter(function (l) { var li = l.querySelectorAll(':scope > li'); return li.length > 1 && Array.prototype.every.call(li, kopVan); });
+  // stappen: uitdrukkelijk gevraagd, of de enige lijst waarvan elk item met een vette titel begint
+  var stapLijst = lijsten.filter(function (l) { return soort(l) === 'stappen'; })[0]
+    || (metKop.length === 1 && soort(metKop[0]) !== 'begrippen' ? metKop[0] : null);
 
-        // Add name(s)
-        function addName() {
-            const input = nameInput.value;
-            const newNames = input.split(',')
-                .map(n => n.trim())
-                .filter(n => n && !names.includes(n));
-            
-            if (newNames.length > 0) {
-                newNames.forEach(name => {
-                    names.push(name);
-                    if (!originalNames.includes(name)) {
-                        originalNames.push(name);
-                    }
-                });
-                nameInput.value = '';
-                updateNamesList();
-                drawWheel();
-            }
-            nameInput.focus();
-        }
+  var raam = maak('div', 'oc-u-raam'), lees = maak('div', 'oc-u-lees'), doe = maak('div', 'oc-u-doe'), aantal = 0;
+  kids.forEach(function (k, i) {
+    var s = soort(k), t = tekst(k);
+    if (i === 0 && k.tagName === 'P' && !/^Tip\b/.test(t) && !/^(tip|noot|stil)$/.test(s)) { k.classList.add('oc-u-intro'); lees.appendChild(k); return; }
+    if (k === stapLijst) {
+      var ol = maak('ol', 'oc-u-stappen');
+      Array.prototype.forEach.call(k.querySelectorAll(':scope > li'), function (li) {
+        var b = kopVan(li), stap = maak('li', 'oc-u-stap'), tx = maak('div', 'oc-u-stap-tekst');
+        aantal++;
+        stap.appendChild(maak('span', 'oc-u-nr', String(aantal))).setAttribute('aria-hidden', 'true');
+        var titel = maak('span', 'oc-u-stap-titel'), rest = maak('span', 'oc-u-stap-uitleg');
+        if (b) { titel.innerHTML = b.innerHTML.replace(/\s*[.:]\s*$/, ''); b.remove(); }
+        while (li.firstChild) rest.appendChild(li.firstChild);
+        if (b) tx.appendChild(titel); else rest.classList.add('oc-u-enkel');
+        if (netjesBegin(rest)) tx.appendChild(rest);
+        stap.appendChild(tx); ol.appendChild(stap);
+      });
+      doe.appendChild(ol); k.remove(); return;
+    }
+    if (/^(UL|OL)$/.test(k.tagName) && s !== 'lijst' && (s === 'begrippen' || metKop.indexOf(k) > -1)) {
+      k.className = 'oc-u-begrippen';
+      Array.prototype.forEach.call(k.children, function (li) { var w = maak('span', 'oc-u-begrip-tekst'); while (li.firstChild) w.appendChild(li.firstChild); li.className = 'oc-u-begrip'; li.appendChild(w); });
+      doe.appendChild(k); return;
+    }
+    var tip = k.tagName === 'P' && (s === 'tip' || /^Tip\b[^:.]{0,40}:/.test(t));
+    if (tip) {
+      var kaart = maak('div', 'oc-u-tip'), m = t.match(/^(Tip\b[^:.]{0,40}):/);
+      kaart.setAttribute('role', 'note');
+      kaart.innerHTML = ICO.tip;
+      var tt = maak('div'), tk = maak('span', 'oc-u-tip-titel', m ? m[1] : 'Tip'), tb = maak('span', 'oc-u-tip-tekst');
+      while (k.firstChild) tb.appendChild(k.firstChild);
+      if (m) { // "Tip:" of "Tip voor ...:" weghalen uit de tekst zelf
+        var w = document.createTreeWalker(tb, NodeFilter.SHOW_TEXT), n, weg = m[0].length;
+        while (weg > 0 && (n = w.nextNode())) { var l = n.nodeValue.replace(/^\s+/, '').length, voor = n.nodeValue.length - l; var x = Math.min(weg, l); n.nodeValue = n.nodeValue.slice(voor + x); weg -= x; }
+        netjesBegin(tb);
+      }
+      tt.appendChild(tk); tt.appendChild(tb); kaart.appendChild(tt);
+      doe.appendChild(kaart); k.remove(); return;
+    }
+    if (s === 'stil' || (k.tagName === 'P' && /^Alles blijft op dit toestel/.test(t))) {
+      k.className = 'oc-u-stil'; var sp = maak('span'); while (k.firstChild) sp.appendChild(k.firstChild);
+      k.innerHTML = ICO.stil; k.appendChild(sp); doe.appendChild(k); return;
+    }
+    if (k.tagName === 'P') k.classList.add('oc-u-noot');
+    doe.appendChild(k);
+  });
 
-        // Remove name
-        function removeName(index) {
-            names.splice(index, 1);
-            updateNamesList();
-            drawWheel();
-        }
+  // verwijzingen naar andere tools als chips, elk één keer
+  var hier = location.pathname.replace(/index\.html$/, ''), gezien = {}, chips = [];
+  Array.prototype.forEach.call(doe.querySelectorAll('a[href]'), function (a) {
+    var u; try { u = new URL(a.getAttribute('href'), location.href); } catch (e) { return; }
+    var thuis = u.host === location.host || /(^|\.)onderconstructie\.github\.io$/.test(u.host);
+    var pad = u.pathname.replace(/index\.html$/, '');
+    if (!thuis || pad === hier || pad === '/' || gezien[pad] || u.hash) return;
+    gezien[pad] = 1;
+    var c = maak('a', 'oc-u-chip'); c.href = a.getAttribute('href');
+    c.innerHTML = '<span class="oc-u-chip-ico">' + ICO.naar + '</span>';
+    c.appendChild(document.createTextNode(tekst(a)));
+    chips.push(c);
+  });
+  if (lees.firstChild) raam.appendChild(lees); else raam.classList.add('oc-u-zonder-intro');
+  // een lange inleiding krijgt pas naast de stappen plaats op een echt breed scherm
+  if (lees.firstChild && tekst(lees.firstChild).split(' ').length > 50) raam.classList.add('oc-u-lang');
+  raam.appendChild(doe);
+  if (chips.length) {
+    var samen = maak('div', 'oc-u-samen'), id = 'oc-u-samen-' + Math.random().toString(36).slice(2, 7);
+    samen.appendChild(maak('span', 'oc-u-samen-titel', 'Werkt samen met')).id = id;
+    var rij = maak('div', 'oc-u-chips'); rij.setAttribute('role', 'group'); rij.setAttribute('aria-labelledby', id);
+    chips.forEach(function (c) { rij.appendChild(c); });
+    samen.appendChild(rij); raam.appendChild(samen);
+  }
+  toetsen(raam);
+  inner.innerHTML = ''; inner.appendChild(raam);
 
-        // Spin wheel - BUG FIX: bereken winnaar op basis van waar het rad eindigt
-        function spin() {
-            if (isSpinning || names.length < 2) return;
-            
-            isSpinning = true;
-            spinBtn.disabled = true;
+  // kop: icoon, titel, belofte, pijl
+  var titel = tekst(sum) || 'Hoe werkt dit?';
+  var woorden = tekst(raam).split(' ').length, min = Math.max(1, Math.round(woorden / 180));
+  var belofte = (aantal ? aantal + ' stappen, ' : '') + min + (min === 1 ? ' minuut' : ' minuten') + ' lezen';
+  sum.innerHTML = '<span class="oc-u-ico" aria-hidden="true">' + ICO.kaart + '</span>'
+    + '<span class="oc-u-kop"><span class="oc-u-titel"></span><span class="oc-u-meta"></span></span>'
+    + (aantal > 1 && aantal < 10 ? '<span class="oc-u-route" aria-hidden="true">' + Array.apply(null, Array(aantal)).map(function (x, i) { return '<i>' + (i + 1) + '</i>'; }).join('') + '</span>' : '')
+    + '<span class="oc-u-pijl" aria-hidden="true">' + ICO.pijl + '</span>';
+  sum.querySelector('.oc-u-titel').textContent = titel;
+  sum.querySelector('.oc-u-meta').textContent = belofte;
+  if (!d.id) d.id = SLUG;
+  d.classList.add('oc-u');
 
-            const sliceAngle = 360 / names.length;
-            
-            // Draai 5-8 keer rond plus een willekeurige extra hoek
-            const spins = 5 + Math.random() * 3;
-            const extraAngle = Math.random() * 360;
-            const totalRotation = spins * 360 + extraAngle;
+  // vloeiend openen en sluiten (niet bij minder beweging)
+  var rustig = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: true };
+  var ease = 'cubic-bezier(0.2, 0.7, 0.2, 1)', loopt = null, staat = d.open;
+  function klaar() { loopt = null; inner.style.overflow = ''; inner.style.height = ''; }
+  function zet(open, vloeiend) {
+    staat = open;
+    if (!vloeiend || rustig.matches || !inner.animate) { if (loopt) loopt.cancel(); klaar(); d.open = open; return; }
+    var nu = d.open ? inner.getBoundingClientRect().height : 0;
+    if (loopt) loopt.cancel();
+    d.open = true; inner.style.overflow = 'hidden';
+    var doel = open ? inner.scrollHeight : 0;
+    loopt = inner.animate([{ height: nu + 'px', opacity: open ? (nu ? 1 : 0) : 1 }, { height: doel + 'px', opacity: open ? 1 : 0 }],
+      { duration: open ? 420 : 260, easing: ease });
+    loopt.onfinish = function () { klaar(); if (!open) d.open = false; };
+    loopt.oncancel = function () { inner.style.overflow = ''; };
+    if (open && !nu) {
+      var stukken = raam.querySelectorAll('.oc-u-intro, .oc-u-stap, .oc-u-begrip, .oc-u-tip, .oc-u-noot, .oc-u-stil, .oc-u-samen');
+      Array.prototype.forEach.call(stukken, function (e, i) {
+        e.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 80 + Math.min(i, 8) * 55, easing: ease, fill: 'backwards' });
+      });
+      Array.prototype.forEach.call(raam.querySelectorAll('.oc-u-stap'), function (e, i) {
+        try { e.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], { pseudoElement: '::before', duration: 360, delay: 200 + i * 55, easing: ease, fill: 'backwards' }); } catch (x) {}
+      });
+    }
+  }
+  sum.addEventListener('click', function (e) { e.preventDefault(); zet(!staat, true); });
+  d.addEventListener('toggle', function () { if (!loopt) staat = d.open; });
 
-            currentRotation += totalRotation;
-            canvas.style.transform = `rotate(${currentRotation}deg)`;
-
-            // Bepaal winnaar NADAT de rotatie is berekend
-            setTimeout(() => {
-                // Normaliseer de rotatie naar 0-360
-                const normalizedRotation = currentRotation % 360;
-                
-                // De pointer staat bovenaan (270 graden in canvas coördinaten)
-                // Bereken welke slice onder de pointer ligt
-                // Canvas draait met de klok mee, dus we moeten 270 - rotatie berekenen
-                let pointerAngle = (270 - normalizedRotation) % 360;
-                if (pointerAngle < 0) pointerAngle += 360;
-                
-                // Bepaal de winnaar index
-                const winnerIndex = Math.floor(pointerAngle / sliceAngle) % names.length;
-                const winner = names[winnerIndex];
-                
-                winnerName.textContent = winner;
-                modal.classList.add('active');
-                setTimeout(() => closeModal.focus(), 50);
-                createFlashEffect();
-
-                // Remove winner from pool
-                drawnNames.push(winner);
-                names.splice(winnerIndex, 1);
-                updateNamesList();
-                updateDrawnList();
-                drawWheel();
-
-                isSpinning = false;
-                spinBtn.disabled = names.length < 2;
-            }, 4100);
-        }
-
-        // Reset all
-        function resetAll() {
-            names = [...originalNames];
-            drawnNames = [];
-            // Reset rotatie volledig
-            currentRotation = 0;
-            canvas.style.transition = 'none';
-            canvas.style.transform = 'rotate(0deg)';
-            // Forceer reflow voor transition reset
-            canvas.offsetHeight;
-            canvas.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
-            updateNamesList();
-            updateDrawnList();
-            drawWheel();
-        }
-
-        // Clear all
-        function clearAll() {
-            names = [];
-            drawnNames = [];
-            originalNames = [];
-            currentRotation = 0;
-            canvas.style.transition = 'none';
-            canvas.style.transform = 'rotate(0deg)';
-            canvas.offsetHeight;
-            canvas.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
-            updateNamesList();
-            updateDrawnList();
-            drawWheel();
-        }
-
-        // Flash/strobe effect
-        function createFlashEffect() {
-            const flash = document.createElement('div');
-            flash.className = 'flash-overlay';
-            document.body.appendChild(flash);
-            
-            // Trigger reflow
-            flash.offsetHeight;
-            flash.classList.add('active');
-            
-            setTimeout(() => {
-                flash.classList.remove('active');
-                setTimeout(() => flash.remove(), 300);
-            }, 150);
-            
-            // Second flash
-            setTimeout(() => {
-                const flash2 = document.createElement('div');
-                flash2.className = 'flash-overlay';
-                document.body.appendChild(flash2);
-                flash2.offsetHeight;
-                flash2.classList.add('active');
-                setTimeout(() => {
-                    flash2.classList.remove('active');
-                    setTimeout(() => flash2.remove(), 300);
-                }, 100);
-            }, 200);
-            
-            // Third flash
-            setTimeout(() => {
-                const flash3 = document.createElement('div');
-                flash3.className = 'flash-overlay';
-                document.body.appendChild(flash3);
-                flash3.offsetHeight;
-                flash3.classList.add('active');
-                setTimeout(() => {
-                    flash3.classList.remove('active');
-                    setTimeout(() => flash3.remove(), 300);
-                }, 80);
-            }, 350);
-
-            if (!document.getElementById('flash-style')) {
-                const style = document.createElement('style');
-                style.id = 'flash-style';
-                style.textContent = `
-                    .flash-overlay {
-                        position: fixed;
-                        inset: 0;
-                        background: var(--accent);
-                        opacity: 0;
-                        pointer-events: none;
-                        z-index: 150;
-                        transition: opacity 0.15s ease-out;
-                    }
-                    .flash-overlay.active {
-                        opacity: 0.3;
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-        }
-
-        // Event listeners
-
-        /* ---------- Namen overnemen uit een andere tool ---------- */
-        const importBtn = document.getElementById('importBtn');
-        function syncImport() { importBtn.hidden = ocShare.count(['betrokkene'], 'fortuna') === 0; }
-        importBtn.addEventListener('click', async () => {
-            const picked = await ocShare.pick({ types:['betrokkene'], self:'fortuna', title:'Namen overnemen' });
-            if (!picked.length) return;
-            const fresh = [...new Set(picked.map(p => p.text.trim()).filter(Boolean))].filter(n => !names.includes(n));
-            fresh.forEach(n => { names.push(n); if (!originalNames.includes(n)) originalNames.push(n); });
-            updateNamesList(); drawWheel();
-            const skipped = picked.length - fresh.length;
-            ocToast(fresh.length ? `${fresh.length} ${fresh.length === 1 ? 'naam' : 'namen'} overgenomen${skipped ? ` (${skipped} stond${skipped === 1 ? '' : 'en'} er al)` : ''}` : 'Die namen staan er al');
-        });
-        syncImport();
-        window.addEventListener('focus', syncImport);
-        window.addEventListener('storage', syncImport);
-
-        addBtn.addEventListener('click', addName);
-        namesList.addEventListener('click', e => { const b = e.target.closest('[data-remove]'); if (b) removeName(+b.dataset.remove); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) modal.classList.remove('active'); });
-        nameInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') addName();
-        });
-        spinBtn.addEventListener('click', spin);
-        resetBtn.addEventListener('click', resetAll);
-        clearBtn.addEventListener('click', clearAll);
-        closeModal.addEventListener('click', () => modal.classList.remove('active'));
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.classList.remove('active');
-        });
-
-        // Initialize
-        updateNamesList();
-        updateDrawnList();
-        drawWheel();
-    </script>
-    <div class="oc-toast" id="ocToast" role="status" aria-live="polite"></div>
+  // #hoe-werkt-dit opent het blok
+  function vanAdres(vloeiend) {
+    var h = decodeURIComponent(location.hash.slice(1));
+    if (h !== SLUG && h !== d.id) return;
+    if (!staat) zet(true, vloeiend);
+    requestAnimationFrame(function () { d.scrollIntoView({ behavior: vloeiend && !rustig.matches ? 'smooth' : 'auto', block: 'start' }); });
+  }
+  window.addEventListener('hashchange', function () { vanAdres(true); });
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href="#' + SLUG + '"]');
+    if (a && location.hash === '#' + SLUG) { e.preventDefault(); vanAdres(true); }
+  });
+  vanAdres(false);
+})();
+/* oc-uitleg v1 einde */
+</script>
 </body>
 </html>
