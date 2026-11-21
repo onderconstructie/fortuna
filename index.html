@@ -1142,7 +1142,7 @@ header[data-oc-kop][data-stand="compact"]::before { content:""; order:-1; flex:n
         <div class="main-grid">
             <section class="card names-card" aria-labelledby="names-title">
                 <div class="card-head">
-                    <h2 class="card-title" id="names-title">Deelnemers</h2>
+                    <h2 class="card-title" id="names-title">Wie doet mee?</h2>
                     
                 </div>
 
@@ -1167,7 +1167,7 @@ header[data-oc-kop][data-stand="compact"]::before { content:""; order:-1; flex:n
             </section>
 
             <section class="card drawn-card" aria-labelledby="drawn-title">
-                <div class="card-head card-head-plain"><h2 class="card-title" id="drawn-title">Getrokken</h2></div>
+                <div class="card-head card-head-plain"><h2 class="card-title" id="drawn-title">Wie is getrokken?</h2></div>
                 <div id="drawn"></div>
                 <button type="button" class="link-btn" id="round-btn" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Nieuwe ronde</button>
             </section>
@@ -1680,7 +1680,7 @@ function render() {
   const p = pool(), d = state.drawn, n = state.all.length;
   // Deelnemers
   let h;
-  if (!n) h = `<div class="empty"><strong>Nog geen deelnemers</strong>Typ hierboven de namen, of bekijk eerst hoe het werkt.<div class="oc-start-btns"><button type="button" class="oc-begin" data-oc-begin="#name-in">Begin met een naam</button><button type="button" class="oc-vb" id="vb-load">Voorbeeld bekijken</button></div><p class="oc-open-row"><button type="button" class="oc-open-link" data-bestand="open">${ICO_OPEN}Open bestand</button></p></div>`;
+  if (!n) h = `<div class="empty"><strong>Zet de namen erin</strong>Typ ze hierboven, of bekijk eerst hoe het werkt.<div class="oc-start-btns"><button type="button" class="oc-begin" data-oc-begin="#name-in">Begin met een naam</button><button type="button" class="oc-vb" id="vb-load">Voorbeeld bekijken</button></div><p class="oc-open-row"><button type="button" class="oc-open-link" data-bestand="open">${ICO_OPEN}Open bestand</button></p></div>`;
   else if (!p.length) h = `<p class="all-done">Iedereen is getrokken.</p>`;
   else h = `<ul class="names-list" aria-label="Namen in het rad">${p.map((nm, i) => `<li class="name-item"><span class="name-dot" style="background:${kleur(i, p.length).bg}" aria-hidden="true"></span><span class="name-text" title="${esc(nm)}">${esc(nm)}</span><button type="button" class="name-remove" data-remove="${esc(nm)}" aria-label="Verwijder ${esc(nm)}">${ICO_X}</button></li>`).join('')}</ul>`;
   if (p.length) h += `<p class="names-count">${p.length} ${p.length === 1 ? 'naam' : 'namen'} in het rad${d.length ? ` · ${d.length} getrokken` : ''}</p>`;
